@@ -802,7 +802,7 @@ const App: React.FC = () => {
               <span className="w-8 h-8 bg-ios-blue rounded-lg flex items-center justify-center text-white">
                 <Settings className="w-5 h-5" />
               </span>
-              Profile Manager
+              iOS Profile Manager
             </h1>
             <button 
               className="md:hidden text-gray-500"
@@ -938,9 +938,9 @@ const App: React.FC = () => {
           <div className="flex items-center gap-2 md:hidden">
             {/* Spacer for menu button */}
             <div className="w-8" />
-            <h1 className="font-semibold text-gray-900 truncate">
+            <h2 className="font-semibold text-gray-900 truncate text-base">
                {activeId === 'general' ? 'General Settings' : activeId === 'guide' ? 'Guide' : profile.payloads.find(p => p.uuid === activeId)?.displayName}
-            </h1>
+            </h2>
           </div>
           <div className="hidden md:block">
              <h2 className="text-sm font-medium text-gray-500">

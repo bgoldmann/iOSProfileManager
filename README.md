@@ -89,6 +89,15 @@ Replace `YOUR_USERNAME` with your GitHub username (or use the Vercel dashboard a
    - **Install Command:** `npm install`
 4. Deploy. Vercel will run `npm run build` and serve the contents of `dist/`.
 
+### SEO and production URL (optional)
+
+For correct canonical URLs, sitemap, and Open Graph image links in search and social previews, set the production origin as an environment variable:
+
+- **Vercel:** Project → Settings → Environment Variables → add `VITE_APP_URL` = `https://your-app.vercel.app` (use your actual deployment URL).
+- **Other hosts:** Set `VITE_APP_URL` at build time to your site’s public URL.
+
+If unset, the build uses `https://example.com` as a fallback. See `.env.example` for reference.
+
 ### SPA routing (optional)
 
 If you add client-side routes later, configure rewrites so every path serves `index.html`. A `vercel.json` is included:
@@ -124,6 +133,10 @@ ios-profile-manager/
 │   ├── Guide.tsx            # In-app guide: how profiles work, install steps, FAQ
 │   ├── ui/                  # Input, Select, Switch
 │   └── payloads/            # One form per payload type (WifiForm, VPNForm, …)
+├── public/                   # Static assets (copied to dist/ root)
+│   ├── robots.txt            # Crawler rules; sitemap URL set at build from VITE_APP_URL
+│   ├── sitemap.xml           # Generated at build with canonical URL
+│   └── og-image.png          # Social share image (1200×630)
 ├── README.md
 ├── CHANGELOG.md
 └── vercel.json              # SPA rewrites for Vercel

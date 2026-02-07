@@ -3,7 +3,32 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>iOS Profile Manager</title>
+    <title>iOS Profile Manager – Create .mobileconfig in the Browser</title>
+    <meta name="description" content="Create and export iOS configuration profiles (.mobileconfig) for iPhone and iPad in the browser. Wi‑Fi, VPN, restrictions, MDM, 31+ payload types. No server, download locally." />
+    <link rel="canonical" href="__BASE_URL__/" />
+    <meta name="theme-color" content="#007AFF" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <!-- Open Graph -->
+    <meta property="og:title" content="iOS Profile Manager – Create .mobileconfig in the Browser" />
+    <meta property="og:description" content="Create and export iOS configuration profiles (.mobileconfig) for iPhone and iPad in the browser. Wi‑Fi, VPN, restrictions, MDM, 31+ payload types. No server, download locally." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="__BASE_URL__/" />
+    <meta property="og:image" content="__BASE_URL__/og-image.png" />
+    <meta property="og:locale" content="en" />
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="iOS Profile Manager – Create .mobileconfig in the Browser" />
+    <meta name="twitter:description" content="Create and export iOS configuration profiles (.mobileconfig) for iPhone and iPad in the browser. Wi‑Fi, VPN, restrictions, MDM, 31+ payload types. No server, download locally." />
+    <meta name="twitter:image" content="__BASE_URL__/og-image.png" />
+    <!-- JSON-LD: WebApplication -->
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"WebApplication","name":"iOS Profile Manager","description":"Create and export iOS configuration profiles (.mobileconfig) for iPhone and iPad in the browser. Wi‑Fi, VPN, restrictions, MDM, 31+ payload types. No server, download locally.","url":"__BASE_URL__/","applicationCategory":"DeveloperApplication","operatingSystem":"Any","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"browserRequirements":"Requires JavaScript and a modern browser."}
+    </script>
+    <!-- JSON-LD: FAQPage -->
+    <script type="application/ld+json">
+    {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Why does it say Not Verified?","acceptedAnswer":{"@type":"Answer","text":"The profile is unsigned. Signing is optional; unsigned profiles work but show as Not Verified on the device. Use a valid certificate to sign profiles if you need them to show as verified."}},{"@type":"Question","name":"How do I remove a profile?","acceptedAnswer":{"@type":"Answer","text":"Go to Settings → General → VPN & Device Management, select the profile, then tap Remove Profile. You may need to enter your passcode."}},{"@type":"Question","name":"Can I have multiple profiles?","acceptedAnswer":{"@type":"Answer","text":"Yes. Profiles are additive. A device can have multiple configuration profiles; conflicting settings are usually resolved by installation order or payload type rules."}},{"@type":"Question","name":"Why won't the profile install?","acceptedAnswer":{"@type":"Answer","text":"Common causes: HTTP instead of HTTPS (iOS blocks most HTTP profile installs), wrong MIME type when serving from a URL, empty or null optional values in the plist, or corrupted XML. Use Safari on the device and ensure the file is served with application/x-apple-aspen-config."}},{"@type":"Question","name":"What's the difference between supervised and unsupervised?","acceptedAnswer":{"@type":"Answer","text":"Supervised devices (typically organization-owned) support full restrictions, silent app installs, and home screen layout control. Unsupervised (user-owned) devices have limited restriction options. Supervision is enabled via Apple Configurator 2 or Automatic Device Enrollment."}},{"@type":"Question","name":"Is my data sent to a server?","acceptedAnswer":{"@type":"Answer","text":"No. This app runs entirely in your browser. Profiles are built and downloaded locally. No data is sent to any server."}}]}
+    </script>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script>
