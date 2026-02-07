@@ -15,6 +15,7 @@ A professional web app to create, edit, and export **iOS configuration profiles*
 - **Download `.mobileconfig`** — Generates valid XML and triggers a download; install on device via Settings or MDM
 - **Responsive UI** — Sidebar collapses on mobile, search for payload types, iOS-style colors (e.g. `#007AFF`)
 - **Client-side only** — No data is sent to any server; profiles are built and downloaded locally
+- **In-app Guide** — Built-in guide explains how profiles work, how to install on iOS, and answers common questions (FAQ)
 
 ### Supported payload types
 
@@ -120,6 +121,7 @@ ios-profile-manager/
 │   └── plistGenerator.ts   # Builds .mobileconfig XML from Profile
 ├── components/
 │   ├── GeneralSettings.tsx  # Profile display name, org, identifier, description
+│   ├── Guide.tsx            # In-app guide: how profiles work, install steps, FAQ
 │   ├── ui/                  # Input, Select, Switch
 │   └── payloads/            # One form per payload type (WifiForm, VPNForm, …)
 ├── README.md

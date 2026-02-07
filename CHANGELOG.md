@@ -23,3 +23,4 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - **Google Account** — `com.apple.google.account`; account description, optional account name and hide system setup.
 - **Fonts** — `com.apple.font`; install custom fonts (name + base64 data).
 - **Single Sign-On (SSO)** — `com.apple.extensibility.sso`; name, team ID, extension type, bundle IDs.
+- **In-app Guide** — Guide section in the webapp sidebar: how profiles work, how to install on iOS, and FAQ. Accessible via the Guide button (HelpCircle icon) alongside General and payloads.

@@ -35,7 +35,8 @@ import {
   Printer,
   Bell,
   Type,
-  LogIn
+  LogIn,
+  HelpCircle
 } from 'lucide-react';
 import { 
   Profile, 
@@ -76,6 +77,7 @@ import {
   SsoPayload
 } from './types';
 import { GeneralSettings } from './components/GeneralSettings';
+import { Guide } from './components/Guide';
 import { WifiForm } from './components/payloads/WifiForm';
 import { WebClipForm } from './components/payloads/WebClipForm';
 import { EmailForm } from './components/payloads/EmailForm';
@@ -697,6 +699,10 @@ const App: React.FC = () => {
       );
     }
 
+    if (activeId === 'guide') {
+      return <Guide />;
+    }
+
     const payload = profile.payloads.find(p => p.uuid === activeId);
     if (!payload) return null;
 
@@ -822,6 +828,18 @@ const App: React.FC = () => {
                 <span className="font-medium">General</span>
                 {activeId === 'general' && <ChevronRight className="w-4 h-4 ml-auto opacity-70" />}
               </button>
+              <button
+                onClick={() => { setActiveId('guide'); setIsSidebarOpen(false); }}
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
+                  activeId === 'guide' 
+                    ? 'bg-ios-blue text-white shadow-sm' 
+                    : 'text-gray-700 hover:bg-gray-100'
+                }`}
+              >
+                <HelpCircle className="w-4 h-4" />
+                <span className="font-medium">Guide</span>
+                {activeId === 'guide' && <ChevronRight className="w-4 h-4 ml-auto opacity-70" />}
+              </button>
             </div>
 
             {/* Payloads Section */}
@@ -921,7 +939,7 @@ const App: React.FC = () => {
             {/* Spacer for menu button */}
             <div className="w-8" />
             <h1 className="font-semibold text-gray-900 truncate">
-               {activeId === 'general' ? 'General Settings' : profile.payloads.find(p => p.uuid === activeId)?.displayName}
+               {activeId === 'general' ? 'General Settings' : activeId === 'guide' ? 'Guide' : profile.payloads.find(p => p.uuid === activeId)?.displayName}
             </h1>
           </div>
           <div className="hidden md:block">
