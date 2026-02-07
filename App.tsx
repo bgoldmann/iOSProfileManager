@@ -28,6 +28,7 @@ import {
   Signal, 
   Bluetooth 
 } from 'lucide-react';
+import { Analytics } from '@vercel/analytics/react';
 import { 
   Profile, 
   Payload, 
@@ -764,6 +765,7 @@ const App: React.FC = () => {
            </div>
         </div>
       </main>
+      <Analytics />
     </div>
   );
 };
