@@ -1,0 +1,5 @@
+{
+  "name": "iOS Profile Manager",
+  "description": "A professional web application to create, edit, and export iOS configuration profiles (.mobileconfig) directly from the browser.",
+  "requestFramePermissions": []
+}
