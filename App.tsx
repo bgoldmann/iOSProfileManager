@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { 
   Settings, 
   Wifi, 
@@ -201,6 +201,11 @@ const App: React.FC = () => {
   const [activeId, setActiveId] = useState<string>('general');
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [searchTerm, setSearchTerm] = useState('');
+  const mainContentRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    mainContentRef.current?.scrollTo({ top: 0, behavior: 'instant' });
+  }, [activeId]);
 
   const addPayload = (type: PayloadType) => {
     const uuid = generateUUID();
@@ -854,6 +859,7 @@ const App: React.FC = () => {
             <div>
               <h3 className="text-xs font-semibold text-gray-400 uppercase tracking-wider mb-2 px-2">Settings</h3>
               <button
+                type="button"
                 onClick={() => { setActiveId('general'); setIsSidebarOpen(false); }}
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
                   activeId === 'general' 
@@ -866,6 +872,7 @@ const App: React.FC = () => {
                 {activeId === 'general' && <ChevronRight className="w-4 h-4 ml-auto opacity-70" />}
               </button>
               <button
+                type="button"
                 onClick={() => { setActiveId('guide'); setIsSidebarOpen(false); }}
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
                   activeId === 'guide' 
@@ -878,6 +885,7 @@ const App: React.FC = () => {
                 {activeId === 'guide' && <ChevronRight className="w-4 h-4 ml-auto opacity-70" />}
               </button>
               <button
+                type="button"
                 onClick={() => { setActiveId('iphone-codes'); setIsSidebarOpen(false); }}
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
                   activeId === 'iphone-codes' 
@@ -890,6 +898,7 @@ const App: React.FC = () => {
                 {activeId === 'iphone-codes' && <ChevronRight className="w-4 h-4 ml-auto opacity-70" />}
               </button>
               <button
+                type="button"
                 onClick={() => { setActiveId('iran-ussd'); setIsSidebarOpen(false); }}
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
                   activeId === 'iran-ussd' 
@@ -902,6 +911,7 @@ const App: React.FC = () => {
                 {activeId === 'iran-ussd' && <ChevronRight className="w-4 h-4 ml-auto opacity-70" />}
               </button>
               <button
+                type="button"
                 onClick={() => { setActiveId('esim-guide'); setIsSidebarOpen(false); }}
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
                   activeId === 'esim-guide' 
@@ -1033,8 +1043,8 @@ const App: React.FC = () => {
         </header>
 
         {/* Form Container */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-8">
-           <div className="max-w-3xl mx-auto pb-12">
+        <div className="flex-1 overflow-y-auto p-4 sm:p-8" ref={mainContentRef}>
+           <div className="max-w-3xl mx-auto pb-12 min-h-0">
              {renderActiveContent()}
            </div>
         </div>
