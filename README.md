@@ -18,6 +18,7 @@ A professional web app to create, edit, and export **iOS configuration profiles*
 - **In-app Guide** — Built-in guide explains how profiles work, how to install on iOS, and answers common questions (FAQ)
 - **iPhone Codes** — Reference page of secret dial codes (e.g. `*#06#` for IMEI, Field Test Mode) with copy-to-clipboard
 - **Iran USSD** — USSD codes for Iranian carriers (Irancell, MCI/Hamrah-e Aval, Rightel): balance, data packages, top-up, and more
+- **eSIM Guide** — How eSIM works (LPA, SM-DP+, EID), how profiles are made, and how to push/deliver eSIMs (QR, manual, carrier app, operator-initiated)
 
 ### Supported payload types
 
@@ -135,6 +136,7 @@ ios-profile-manager/
 │   ├── Guide.tsx            # In-app guide: how profiles work, install steps, FAQ
 │   ├── iPhoneCodes.tsx      # iPhone dial codes reference (*#06#, Field Test, etc.)
 │   ├── IranUSSDCodes.tsx    # USSD codes for Iranian carriers (Irancell, MCI, Rightel)
+│   ├── ESimGuide.tsx       # eSIM: how it works, how it's made, how to push
 │   ├── ui/                  # Input, Select, Switch
 │   └── payloads/            # One form per payload type (WifiForm, VPNForm, …)
 ├── public/                   # Static assets (copied to dist/ root)
