@@ -26,7 +26,16 @@ import {
   Sliders, 
   Filter, 
   Signal, 
-  Bluetooth 
+  Bluetooth,
+  Contact,
+  MessageCircle,
+  Inbox,
+  Compass,
+  Key,
+  Printer,
+  Bell,
+  Type,
+  LogIn
 } from 'lucide-react';
 import { 
   Profile, 
@@ -53,7 +62,18 @@ import {
   WebContentFilterPayload,
   CellularPayload,
   BluetoothPayload,
-  GlobalHttpProxyPayload 
+  GlobalHttpProxyPayload,
+  CardDavPayload,
+  LockScreenPayload,
+  ExchangeEasPayload,
+  SafariPayload,
+  ScepPayload,
+  DomainsPayload,
+  AirPrintPayload,
+  NotificationSettingsPayload,
+  GoogleAccountPayload,
+  FontsPayload,
+  SsoPayload
 } from './types';
 import { GeneralSettings } from './components/GeneralSettings';
 import { WifiForm } from './components/payloads/WifiForm';
@@ -78,6 +98,17 @@ import { WebContentFilterForm } from './components/payloads/WebContentFilterForm
 import { CellularForm } from './components/payloads/CellularForm';
 import { BluetoothForm } from './components/payloads/BluetoothForm';
 import { GlobalHttpProxyForm } from './components/payloads/GlobalHttpProxyForm';
+import { CardDavForm } from './components/payloads/CardDavForm';
+import { LockScreenForm } from './components/payloads/LockScreenForm';
+import { ExchangeEasForm } from './components/payloads/ExchangeEasForm';
+import { SafariForm } from './components/payloads/SafariForm';
+import { ScepForm } from './components/payloads/ScepForm';
+import { DomainsForm } from './components/payloads/DomainsForm';
+import { AirPrintForm } from './components/payloads/AirPrintForm';
+import { NotificationSettingsForm } from './components/payloads/NotificationSettingsForm';
+import { GoogleAccountForm } from './components/payloads/GoogleAccountForm';
+import { FontsForm } from './components/payloads/FontsForm';
+import { SsoForm } from './components/payloads/SsoForm';
 import { downloadMobileConfig } from './utils/plistGenerator';
 
 // Simple UUID generator
@@ -139,6 +170,17 @@ const AVAILABLE_PAYLOADS = [
     { type: PayloadType.CALDAV, label: 'CalDAV', icon: Calendar },
     { type: PayloadType.SUBSCRIBED_CALENDAR, label: 'Subscribed Cal', icon: Rss },
     { type: PayloadType.LDAP, label: 'LDAP', icon: Users },
+    { type: PayloadType.CARDDAV, label: 'CardDAV (Contacts)', icon: Contact },
+    { type: PayloadType.LOCK_SCREEN, label: 'Lock Screen Message', icon: MessageCircle },
+    { type: PayloadType.EXCHANGE_EAS, label: 'Exchange ActiveSync', icon: Inbox },
+    { type: PayloadType.SAFARI, label: 'Safari', icon: Compass },
+    { type: PayloadType.SCEP, label: 'SCEP', icon: Key },
+    { type: PayloadType.DOMAINS, label: 'Domains', icon: Globe },
+    { type: PayloadType.AIRPRINT, label: 'AirPrint', icon: Printer },
+    { type: PayloadType.NOTIFICATION_SETTINGS, label: 'Notification Settings', icon: Bell },
+    { type: PayloadType.GOOGLE_ACCOUNT, label: 'Google Account', icon: Users },
+    { type: PayloadType.FONTS, label: 'Fonts', icon: Type },
+    { type: PayloadType.SSO, label: 'Single Sign-On', icon: LogIn },
     { type: PayloadType.CAMERA, label: 'Camera', icon: Camera },
 ];
 
@@ -176,6 +218,17 @@ const App: React.FC = () => {
             case PayloadType.CELLULAR: return 'cellular';
             case PayloadType.BLUETOOTH: return 'bluetooth';
             case PayloadType.GLOBAL_HTTP_PROXY: return 'global-http-proxy';
+            case PayloadType.CARDDAV: return 'carddav';
+            case PayloadType.LOCK_SCREEN: return 'lock-screen';
+            case PayloadType.EXCHANGE_EAS: return 'exchange-eas';
+            case PayloadType.SAFARI: return 'safari';
+            case PayloadType.SCEP: return 'scep';
+            case PayloadType.DOMAINS: return 'domains';
+            case PayloadType.AIRPRINT: return 'airprint';
+            case PayloadType.NOTIFICATION_SETTINGS: return 'notification-settings';
+            case PayloadType.GOOGLE_ACCOUNT: return 'google-account';
+            case PayloadType.FONTS: return 'fonts';
+            case PayloadType.SSO: return 'sso';
             default: return 'payload';
         }
     };
@@ -460,6 +513,103 @@ const App: React.FC = () => {
                  proxyPacFallbackAllowed: false,
              } as GlobalHttpProxyPayload;
              break;
+        case PayloadType.CARDDAV:
+             newPayload = {
+                 ...base,
+                 displayName: 'CardDAV (Contacts)',
+                 accountDescription: 'My Contacts',
+                 hostName: '',
+                 username: '',
+                 port: 443,
+                 useSSL: true,
+             } as CardDavPayload;
+             break;
+        case PayloadType.LOCK_SCREEN:
+             newPayload = {
+                 ...base,
+                 displayName: 'Lock Screen Message',
+                 lockScreenMessage: '',
+             } as LockScreenPayload;
+             break;
+        case PayloadType.EXCHANGE_EAS:
+             newPayload = {
+                 ...base,
+                 displayName: 'Exchange ActiveSync',
+                 emailAddress: '',
+                 host: '',
+                 useSSL: true,
+                 mailNumberOfPastDaysToSync: 7,
+             } as ExchangeEasPayload;
+             break;
+        case PayloadType.SAFARI:
+             newPayload = {
+                 ...base,
+                 displayName: 'Safari',
+                 homepage: '',
+                 bookmarks: [],
+                 allowAutoFill: true,
+                 forceFraudWarning: true,
+                 allowJavaScript: true,
+                 allowPopups: false,
+             } as SafariPayload;
+             break;
+        case PayloadType.SCEP:
+             newPayload = {
+                 ...base,
+                 displayName: 'SCEP',
+                 url: '',
+                 keysize: 2048,
+                 keyType: 'RSA',
+             } as ScepPayload;
+             break;
+        case PayloadType.DOMAINS:
+             newPayload = {
+                 ...base,
+                 displayName: 'Domains',
+                 emailDomains: [],
+                 webDomains: [],
+                 safariPasswordAutoFillDomains: [],
+             } as DomainsPayload;
+             break;
+        case PayloadType.AIRPRINT:
+             newPayload = {
+                 ...base,
+                 displayName: 'AirPrint',
+                 printers: [],
+             } as AirPrintPayload;
+             break;
+        case PayloadType.NOTIFICATION_SETTINGS:
+             newPayload = {
+                 ...base,
+                 displayName: 'Notification Settings',
+                 allowNotifications: true,
+                 allowNotificationsModification: true,
+             } as NotificationSettingsPayload;
+             break;
+        case PayloadType.GOOGLE_ACCOUNT:
+             newPayload = {
+                 ...base,
+                 displayName: 'Google Account',
+                 accountDescription: 'Google',
+             } as GoogleAccountPayload;
+             break;
+        case PayloadType.FONTS:
+             newPayload = {
+                 ...base,
+                 displayName: 'Fonts',
+                 fonts: [],
+             } as FontsPayload;
+             break;
+        case PayloadType.SSO:
+             newPayload = {
+                 ...base,
+                 displayName: 'Single Sign-On',
+                 name: '',
+                 teamId: '',
+                 type_: 'com.apple.extensibility.sso.kerberos',
+                 bundleIds: [],
+             } as SsoPayload;
+             break;
         default:
             return;
     }
@@ -518,6 +668,17 @@ const App: React.FC = () => {
       case PayloadType.LDAP: return <Users className="w-4 h-4" />;
       case PayloadType.CAMERA: return <Camera className="w-4 h-4" />;
       case PayloadType.APP_LOCK: return <Smartphone className="w-4 h-4" />;
+      case PayloadType.CARDDAV: return <Contact className="w-4 h-4" />;
+      case PayloadType.LOCK_SCREEN: return <MessageCircle className="w-4 h-4" />;
+      case PayloadType.EXCHANGE_EAS: return <Inbox className="w-4 h-4" />;
+      case PayloadType.SAFARI: return <Compass className="w-4 h-4" />;
+      case PayloadType.SCEP: return <Key className="w-4 h-4" />;
+      case PayloadType.DOMAINS: return <Globe className="w-4 h-4" />;
+      case PayloadType.AIRPRINT: return <Printer className="w-4 h-4" />;
+      case PayloadType.NOTIFICATION_SETTINGS: return <Bell className="w-4 h-4" />;
+      case PayloadType.GOOGLE_ACCOUNT: return <Users className="w-4 h-4" />;
+      case PayloadType.FONTS: return <Type className="w-4 h-4" />;
+      case PayloadType.SSO: return <LogIn className="w-4 h-4" />;
       default: return <Settings className="w-4 h-4" />;
     }
   };
@@ -584,6 +745,28 @@ const App: React.FC = () => {
         return <BluetoothForm payload={payload as BluetoothPayload} onChange={(p) => updatePayload(p)} />;
       case PayloadType.GLOBAL_HTTP_PROXY:
         return <GlobalHttpProxyForm payload={payload as GlobalHttpProxyPayload} onChange={(p) => updatePayload(p)} />;
+      case PayloadType.CARDDAV:
+        return <CardDavForm payload={payload as CardDavPayload} onChange={(p) => updatePayload(p)} />;
+      case PayloadType.LOCK_SCREEN:
+        return <LockScreenForm payload={payload as LockScreenPayload} onChange={(p) => updatePayload(p)} />;
+      case PayloadType.EXCHANGE_EAS:
+        return <ExchangeEasForm payload={payload as ExchangeEasPayload} onChange={(p) => updatePayload(p)} />;
+      case PayloadType.SAFARI:
+        return <SafariForm payload={payload as SafariPayload} onChange={(p) => updatePayload(p)} />;
+      case PayloadType.SCEP:
+        return <ScepForm payload={payload as ScepPayload} onChange={(p) => updatePayload(p)} />;
+      case PayloadType.DOMAINS:
+        return <DomainsForm payload={payload as DomainsPayload} onChange={(p) => updatePayload(p)} />;
+      case PayloadType.AIRPRINT:
+        return <AirPrintForm payload={payload as AirPrintPayload} onChange={(p) => updatePayload(p)} />;
+      case PayloadType.NOTIFICATION_SETTINGS:
+        return <NotificationSettingsForm payload={payload as NotificationSettingsPayload} onChange={(p) => updatePayload(p)} />;
+      case PayloadType.GOOGLE_ACCOUNT:
+        return <GoogleAccountForm payload={payload as GoogleAccountPayload} onChange={(p) => updatePayload(p)} />;
+      case PayloadType.FONTS:
+        return <FontsForm payload={payload as FontsPayload} onChange={(p) => updatePayload(p)} />;
+      case PayloadType.SSO:
+        return <SsoForm payload={payload as SsoPayload} onChange={(p) => updatePayload(p)} />;
       default:
         return <div>Unknown Payload Type</div>;
     }

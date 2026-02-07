@@ -21,6 +21,17 @@ export enum PayloadType {
   CELLULAR = 'com.apple.cellular',
   BLUETOOTH = 'com.custom.bluetooth.configuration', // Internal type, maps to restrictions in generator
   GLOBAL_HTTP_PROXY = 'com.apple.proxy.http.global',
+  CARDDAV = 'com.apple.carddav.account',
+  LOCK_SCREEN = 'com.apple.lockscreen',
+  EXCHANGE_EAS = 'com.apple.eas.account',
+  SAFARI = 'com.apple.safari',
+  SCEP = 'com.apple.security.scep',
+  DOMAINS = 'com.apple.domains',
+  AIRPRINT = 'com.apple.airprint',
+  NOTIFICATION_SETTINGS = 'com.apple.notificationsettings',
+  GOOGLE_ACCOUNT = 'com.apple.google.account',
+  FONTS = 'com.apple.font',
+  SSO = 'com.apple.extensibility.sso',
 }
 
 export interface BasePayload {
@@ -172,6 +183,106 @@ export interface CalDavPayload extends BasePayload {
   username: string;
   port?: number;
   useSSL: boolean;
+}
+
+export interface CardDavPayload extends BasePayload {
+  type: PayloadType.CARDDAV;
+  accountDescription: string;
+  hostName: string;
+  username: string;
+  password?: string;
+  principalURL?: string;
+  port?: number;
+  useSSL: boolean;
+}
+
+export interface LockScreenPayload extends BasePayload {
+  type: PayloadType.LOCK_SCREEN;
+  lockScreenMessage: string;
+}
+
+export interface ExchangeEasPayload extends BasePayload {
+  type: PayloadType.EXCHANGE_EAS;
+  emailAddress: string;
+  host: string;
+  username?: string;
+  password?: string;
+  useSSL: boolean;
+  mailNumberOfPastDaysToSync?: number;
+  preventMove?: boolean;
+}
+
+export interface SafariBookmark {
+  title: string;
+  url: string;
+}
+
+export interface SafariPayload extends BasePayload {
+  type: PayloadType.SAFARI;
+  homepage?: string;
+  bookmarks: SafariBookmark[];
+  allowAutoFill?: boolean;
+  forceFraudWarning?: boolean;
+  allowJavaScript?: boolean;
+  allowPopups?: boolean;
+}
+
+export interface ScepPayload extends BasePayload {
+  type: PayloadType.SCEP;
+  url: string;
+  name?: string;
+  challenge?: string;
+  keysize: 1024 | 2048;
+  keyType: 'RSA';
+  retries?: number;
+  retryDelay?: number;
+}
+
+export interface DomainsPayload extends BasePayload {
+  type: PayloadType.DOMAINS;
+  emailDomains?: string[];  // Comma-separated in UI
+  webDomains?: string[];    // Comma-separated in UI
+  safariPasswordAutoFillDomains?: string[];
+}
+
+export interface AirPrintPrinter {
+  ipAddress: string;
+  resourcePath: string;
+  port?: number;
+  forceTLS?: boolean;
+}
+
+export interface AirPrintPayload extends BasePayload {
+  type: PayloadType.AIRPRINT;
+  printers: AirPrintPrinter[];
+}
+
+export interface NotificationSettingsPayload extends BasePayload {
+  type: PayloadType.NOTIFICATION_SETTINGS;
+  allowNotifications: boolean;
+  allowNotificationsModification?: boolean;
+}
+
+export interface GoogleAccountPayload extends BasePayload {
+  type: PayloadType.GOOGLE_ACCOUNT;
+  accountDescription: string;
+  accountName?: string;
+  authenticationCredentials?: string; // Base64 or prompt
+  hideSystemAccountSetup?: boolean;
+}
+
+export interface FontsPayload extends BasePayload {
+  type: PayloadType.FONTS;
+  fonts: { name: string; data: string }[];  // data = base64
+}
+
+export interface SsoPayload extends BasePayload {
+  type: PayloadType.SSO;
+  name: string;
+  teamId: string;
+  type_: string;  // e.g. 'com.apple.extensibility.sso.kerberos'
+  bundleIds: string[];  // Comma-separated in UI
+  extensionData?: string;  // Optional plist dict as base64 or JSON for advanced
 }
 
 export interface SubscribedCalendarPayload extends BasePayload {
@@ -347,6 +458,7 @@ export type Payload =
   | CertificatePayload
   | DnsPayload
   | CalDavPayload
+  | CardDavPayload
   | SubscribedCalendarPayload
   | LdapPayload
   | CameraPayload
@@ -359,7 +471,17 @@ export type Payload =
   | WebContentFilterPayload
   | CellularPayload
   | BluetoothPayload
-  | GlobalHttpProxyPayload;
+  | GlobalHttpProxyPayload
+  | LockScreenPayload
+  | ExchangeEasPayload
+  | SafariPayload
+  | ScepPayload
+  | DomainsPayload
+  | AirPrintPayload
+  | NotificationSettingsPayload
+  | GoogleAccountPayload
+  | FontsPayload
+  | SsoPayload;
 
 export interface ProfileMetadata {
   displayName: string;

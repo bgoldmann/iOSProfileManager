@@ -1,6 +1,6 @@
 # iOS Profile Manager
 
-A professional web app to create, edit, and export **iOS configuration profiles** (`.mobileconfig`) directly in the browser. No server required—build Wi‑Fi, VPN, restrictions, Single App Mode (kiosk), and 20+ payload types, then download a valid profile for iPhone and iPad.
+A professional web app to create, edit, and export **iOS configuration profiles** (`.mobileconfig`) directly in the browser. No server required—build Wi‑Fi, VPN, restrictions, Single App Mode (kiosk), and 31+ payload types, then download a valid profile for iPhone and iPad.
 
 ![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.8-3178C6?logo=typescript&logoColor=white)
@@ -11,7 +11,7 @@ A professional web app to create, edit, and export **iOS configuration profiles*
 ## Features
 
 - **Visual profile builder** — General metadata (name, organization, identifier, description) plus a sidebar of configured payloads
-- **20+ payload types** — Add, configure, reorder, and remove payloads with forms that map to Apple’s schema
+- **31+ payload types** — Add, configure, reorder, and remove payloads with forms that map to Apple’s schema
 - **Download `.mobileconfig`** — Generates valid XML and triggers a download; install on device via Settings or MDM
 - **Responsive UI** — Sidebar collapses on mobile, search for payload types, iOS-style colors (e.g. `#007AFF`)
 - **Client-side only** — No data is sent to any server; profiles are built and downloaded locally
@@ -22,9 +22,9 @@ A professional web app to create, edit, and export **iOS configuration profiles*
 |----------|----------|
 | **Network** | Wi‑Fi, VPN (IKEv2, L2TP, IPSec), Encrypted DNS, Global HTTP Proxy, Cellular (APN) |
 | **Security** | Passcode policy, Certificate, Restrictions, Web Content Filter |
-| **Accounts** | Email (IMAP/POP), CalDAV, Subscribed Calendar, LDAP |
-| **Device** | Single App Mode (App Lock), MDM, App Store, Find My, Phone & Siri, Settings Lock, Camera, Bluetooth |
-| **Other** | Web Clip |
+| **Accounts** | Email (IMAP/POP), Exchange ActiveSync, CalDAV, CardDAV (Contacts), Subscribed Calendar, LDAP, Google Account |
+| **Device** | Single App Mode (App Lock), MDM, App Store, Find My, Phone & Siri, Settings Lock, Camera, Bluetooth, Notification Settings |
+| **Other** | Web Clip, Lock Screen Message, Safari (homepage & bookmarks), SCEP, Domains, AirPrint, Fonts, Single Sign-On (SSO) |
 
 ---
 
@@ -99,6 +99,10 @@ If you add client-side routes later, configure rewrites so every path serves `in
 ```
 
 This keeps the app working when users refresh or open a deep link.
+
+---
+
+See [Apple’s payload list](https://support.apple.com/guide/deployment/payload-list-for-iphone-and-ipad-depdca795ebd/web) and [ProfileDocs](https://mosen.github.io/profiledocs/payloads/) for more payload types.
 
 ---
 

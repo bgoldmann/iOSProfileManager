@@ -11,8 +11,10 @@ import {
   CertificatePayload,
   DnsPayload,
   CalDavPayload,
+  CardDavPayload,
   SubscribedCalendarPayload,
   LdapPayload,
+  LockScreenPayload,
   CameraPayload,
   AppLockPayload,
   MdmPayload,
@@ -23,7 +25,18 @@ import {
   WebContentFilterPayload,
   CellularPayload,
   BluetoothPayload,
-  GlobalHttpProxyPayload
+  GlobalHttpProxyPayload,
+  ExchangeEasPayload,
+  SafariPayload,
+  SafariBookmark,
+  ScepPayload,
+  DomainsPayload,
+  AirPrintPayload,
+  AirPrintPrinter,
+  NotificationSettingsPayload,
+  GoogleAccountPayload,
+  FontsPayload,
+  SsoPayload
 } from '../types';
 
 const escapeXml = (unsafe: string): string => {
@@ -324,6 +337,149 @@ const generateCalDavDict = (payload: CalDavPayload): string => {
       content += `${wrapKey('CalDAVPort')}\n${wrapInt(payload.port)}\n`;
   }
 
+  return content;
+};
+
+const generateCardDavDict = (payload: CardDavPayload): string => {
+  let content = '';
+  content += `${wrapKey('CardDAVAccountDescription')}\n${wrapString(payload.accountDescription)}\n`;
+  content += `${wrapKey('CardDAVHostName')}\n${wrapString(payload.hostName)}\n`;
+  content += `${wrapKey('CardDAVUsername')}\n${wrapString(payload.username)}\n`;
+  content += `${wrapKey('CardDAVUseSSL')}\n${wrapBool(payload.useSSL)}\n`;
+
+  if (payload.port) {
+    content += `${wrapKey('CardDAVPort')}\n${wrapInt(payload.port)}\n`;
+  }
+  if (payload.principalURL) {
+    content += `${wrapKey('CardDAVPrincipalURL')}\n${wrapString(payload.principalURL)}\n`;
+  }
+  if (payload.password) {
+    content += `${wrapKey('CardDAVPassword')}\n${wrapString(payload.password)}\n`;
+  }
+
+  return content;
+};
+
+const generateLockScreenDict = (payload: LockScreenPayload): string => {
+  let content = '';
+  content += `${wrapKey('LockScreenMessage')}\n${wrapString(payload.lockScreenMessage)}\n`;
+  return content;
+};
+
+const generateExchangeEasDict = (payload: ExchangeEasPayload): string => {
+  let content = '';
+  content += `${wrapKey('EmailAddress')}\n${wrapString(payload.emailAddress)}\n`;
+  content += `${wrapKey('Host')}\n${wrapString(payload.host)}\n`;
+  content += `${wrapKey('SSL')}\n${wrapBool(payload.useSSL)}\n`;
+  if (payload.username) content += `${wrapKey('UserName')}\n${wrapString(payload.username)}\n`;
+  if (payload.password) content += `${wrapKey('Password')}\n${wrapString(payload.password)}\n`;
+  if (payload.mailNumberOfPastDaysToSync != null) content += `${wrapKey('MailNumberOfPastDaysToSync')}\n${wrapInt(payload.mailNumberOfPastDaysToSync)}\n`;
+  if (payload.preventMove != null) content += `${wrapKey('PreventMove')}\n${wrapBool(payload.preventMove)}\n`;
+  return content;
+};
+
+const generateSafariDict = (payload: SafariPayload): string => {
+  let content = '';
+  if (payload.homepage) content += `${wrapKey('SafariHomePage')}\n${wrapString(payload.homepage)}\n`;
+  if (payload.bookmarks && payload.bookmarks.length > 0) {
+    let arr = '';
+    payload.bookmarks.forEach((bm: SafariBookmark) => {
+      if (bm.url) arr += `\t\t\t<dict>\n\t\t\t\t<key>Title</key>\n\t\t\t\t<string>${escapeXml(bm.title)}</string>\n\t\t\t\t<key>URL</key>\n\t\t\t\t<string>${escapeXml(bm.url)}</string>\n\t\t\t</dict>\n`;
+    });
+    content += `${wrapKey('SafariBookmarks')}\n\t\t<array>\n${arr}\t\t</array>\n`;
+  }
+  if (payload.allowAutoFill !== undefined) content += `${wrapKey('SafariAllowAutoFill')}\n${wrapBool(payload.allowAutoFill)}\n`;
+  if (payload.forceFraudWarning !== undefined) content += `${wrapKey('SafariForceFraudWarning')}\n${wrapBool(payload.forceFraudWarning)}\n`;
+  if (payload.allowJavaScript !== undefined) content += `${wrapKey('SafariAllowJavaScript')}\n${wrapBool(payload.allowJavaScript)}\n`;
+  if (payload.allowPopups !== undefined) content += `${wrapKey('SafariAllowPopups')}\n${wrapBool(payload.allowPopups)}\n`;
+  return content;
+};
+
+const generateScepDict = (payload: ScepPayload): string => {
+  let content = '';
+  content += `${wrapKey('URL')}\n${wrapString(payload.url)}\n`;
+  if (payload.name) content += `${wrapKey('Name')}\n${wrapString(payload.name)}\n`;
+  if (payload.challenge) content += `${wrapKey('Challenge')}\n${wrapString(payload.challenge)}\n`;
+  content += `${wrapKey('Keysize')}\n${wrapInt(payload.keysize)}\n`;
+  content += `${wrapKey('KeyType')}\n${wrapString(payload.keyType)}\n`;
+  if (payload.retries != null) content += `${wrapKey('Retries')}\n${wrapInt(payload.retries)}\n`;
+  if (payload.retryDelay != null) content += `${wrapKey('RetryDelay')}\n${wrapInt(payload.retryDelay)}\n`;
+  return content;
+};
+
+const generateDomainsDict = (payload: DomainsPayload): string => {
+  let content = '';
+  if (payload.emailDomains && payload.emailDomains.length > 0) {
+    content += `${wrapKey('EmailDomains')}\n\t\t<array>\n${payload.emailDomains.map((d) => `\t\t\t<string>${escapeXml(d)}</string>`).join('\n')}\n\t\t</array>\n`;
+  }
+  if (payload.webDomains && payload.webDomains.length > 0) {
+    content += `${wrapKey('WebDomains')}\n\t\t<array>\n${payload.webDomains.map((d) => `\t\t\t<string>${escapeXml(d)}</string>`).join('\n')}\n\t\t</array>\n`;
+  }
+  if (payload.safariPasswordAutoFillDomains && payload.safariPasswordAutoFillDomains.length > 0) {
+    content += `${wrapKey('SafariPasswordAutoFillDomains')}\n\t\t<array>\n${payload.safariPasswordAutoFillDomains.map((d) => `\t\t\t<string>${escapeXml(d)}</string>`).join('\n')}\n\t\t</array>\n`;
+  }
+  return content;
+};
+
+const generateAirPrintDict = (payload: AirPrintPayload): string => {
+  let content = '';
+  if (payload.printers && payload.printers.length > 0) {
+    let arr = '';
+    payload.printers.forEach((p: AirPrintPrinter) => {
+      if (!p.ipAddress || !p.resourcePath) return;
+      let d = '';
+      d += `${wrapKey('IPAddress')}\n${wrapString(p.ipAddress)}\n`;
+      d += `${wrapKey('ResourcePath')}\n${wrapString(p.resourcePath)}\n`;
+      if (p.port != null) d += `${wrapKey('Port')}\n${wrapInt(p.port)}\n`;
+      if (p.forceTLS != null) d += `${wrapKey('ForceTLS')}\n${wrapBool(p.forceTLS)}\n`;
+      arr += `\t\t\t<dict>\n${d}\t\t\t</dict>\n`;
+    });
+    content += `${wrapKey('AirPrint')}\n\t\t<array>\n${arr}\t\t</array>\n`;
+  }
+  return content;
+};
+
+const generateNotificationSettingsDict = (payload: NotificationSettingsPayload): string => {
+  let content = '';
+  content += `${wrapKey('NotificationSettings')}\n\t\t<array>\n\t\t\t<dict>\n`;
+  content += `\t\t\t\t<key>BundleIdentifier</key>\n\t\t\t\t<string>com.apple.mobilesafari</string>\n`;
+  content += `\t\t\t\t<key>NotificationsEnabled</key>\n\t\t\t<${payload.allowNotifications ? 'true' : 'false'}/>\n`;
+  content += `\t\t\t</dict>\n\t\t</array>\n`;
+  if (payload.allowNotificationsModification !== undefined) {
+    content += `${wrapKey('AllowNotificationsModification')}\n${wrapBool(payload.allowNotificationsModification)}\n`;
+  }
+  return content;
+};
+
+const generateGoogleAccountDict = (payload: GoogleAccountPayload): string => {
+  let content = '';
+  content += `${wrapKey('AccountDescription')}\n${wrapString(payload.accountDescription)}\n`;
+  if (payload.accountName) content += `${wrapKey('AccountName')}\n${wrapString(payload.accountName)}\n`;
+  if (payload.hideSystemAccountSetup !== undefined) content += `${wrapKey('HideSystemAccountSetup')}\n${wrapBool(payload.hideSystemAccountSetup)}\n`;
+  return content;
+};
+
+const generateFontsDict = (payload: FontsPayload): string => {
+  let content = '';
+  if (payload.fonts && payload.fonts.length > 0) {
+    let arr = '';
+    payload.fonts.forEach((f) => {
+      if (!f.name || !f.data) return;
+      arr += `\t\t\t<dict>\n\t\t\t\t${wrapKey('Name')}\n\t\t\t\t${wrapString(f.name)}\n\t\t\t\t${wrapKey('Data')}\n\t\t\t\t${wrapData(f.data)}\n\t\t\t</dict>\n`;
+    });
+    content += `${wrapKey('Fonts')}\n\t\t<array>\n${arr}\t\t</array>\n`;
+  }
+  return content;
+};
+
+const generateSsoDict = (payload: SsoPayload): string => {
+  let content = '';
+  content += `${wrapKey('Name')}\n${wrapString(payload.name)}\n`;
+  content += `${wrapKey('TeamIdentifier')}\n${wrapString(payload.teamId)}\n`;
+  content += `${wrapKey('Type')}\n${wrapString(payload.type_)}\n`;
+  if (payload.bundleIds && payload.bundleIds.length > 0) {
+    content += `${wrapKey('BundleIdentifiers')}\n\t\t<array>\n${payload.bundleIds.map((b) => `\t\t\t<string>${escapeXml(b)}</string>`).join('\n')}\n\t\t</array>\n`;
+  }
   return content;
 };
 
@@ -632,6 +788,12 @@ const generatePayloadDict = (payload: Payload): string => {
     case PayloadType.CALDAV:
       specifics = generateCalDavDict(payload as CalDavPayload);
       break;
+    case PayloadType.CARDDAV:
+      specifics = generateCardDavDict(payload as CardDavPayload);
+      break;
+    case PayloadType.LOCK_SCREEN:
+      specifics = generateLockScreenDict(payload as LockScreenPayload);
+      break;
     case PayloadType.SUBSCRIBED_CALENDAR:
       specifics = generateSubscribedCalendarDict(payload as SubscribedCalendarPayload);
       break;
@@ -670,6 +832,33 @@ const generatePayloadDict = (payload: Payload): string => {
       break;
     case PayloadType.GLOBAL_HTTP_PROXY:
       specifics = generateGlobalHttpProxyDict(payload as GlobalHttpProxyPayload);
+      break;
+    case PayloadType.EXCHANGE_EAS:
+      specifics = generateExchangeEasDict(payload as ExchangeEasPayload);
+      break;
+    case PayloadType.SAFARI:
+      specifics = generateSafariDict(payload as SafariPayload);
+      break;
+    case PayloadType.SCEP:
+      specifics = generateScepDict(payload as ScepPayload);
+      break;
+    case PayloadType.DOMAINS:
+      specifics = generateDomainsDict(payload as DomainsPayload);
+      break;
+    case PayloadType.AIRPRINT:
+      specifics = generateAirPrintDict(payload as AirPrintPayload);
+      break;
+    case PayloadType.NOTIFICATION_SETTINGS:
+      specifics = generateNotificationSettingsDict(payload as NotificationSettingsPayload);
+      break;
+    case PayloadType.GOOGLE_ACCOUNT:
+      specifics = generateGoogleAccountDict(payload as GoogleAccountPayload);
+      break;
+    case PayloadType.FONTS:
+      specifics = generateFontsDict(payload as FontsPayload);
+      break;
+    case PayloadType.SSO:
+      specifics = generateSsoDict(payload as SsoPayload);
       break;
   }
 
