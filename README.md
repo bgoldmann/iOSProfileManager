@@ -16,6 +16,8 @@ A professional web app to create, edit, and export **iOS configuration profiles*
 - **Responsive UI** — Sidebar collapses on mobile, search for payload types, iOS-style colors (e.g. `#007AFF`)
 - **Client-side only** — No data is sent to any server; profiles are built and downloaded locally
 - **In-app Guide** — Built-in guide explains how profiles work, how to install on iOS, and answers common questions (FAQ)
+- **iPhone Codes** — Reference page of secret dial codes (e.g. `*#06#` for IMEI, Field Test Mode) with copy-to-clipboard
+- **Iran USSD** — USSD codes for Iranian carriers (Irancell, MCI/Hamrah-e Aval, Rightel): balance, data packages, top-up, and more
 
 ### Supported payload types
 
@@ -131,6 +133,8 @@ ios-profile-manager/
 ├── components/
 │   ├── GeneralSettings.tsx  # Profile display name, org, identifier, description
 │   ├── Guide.tsx            # In-app guide: how profiles work, install steps, FAQ
+│   ├── iPhoneCodes.tsx      # iPhone dial codes reference (*#06#, Field Test, etc.)
+│   ├── IranUSSDCodes.tsx    # USSD codes for Iranian carriers (Irancell, MCI, Rightel)
 │   ├── ui/                  # Input, Select, Switch
 │   └── payloads/            # One form per payload type (WifiForm, VPNForm, …)
 ├── public/                   # Static assets (copied to dist/ root)

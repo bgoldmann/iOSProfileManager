@@ -36,7 +36,10 @@ import {
   Bell,
   Type,
   LogIn,
-  HelpCircle
+  HelpCircle,
+  PhoneCall,
+  Hash,
+  Flag
 } from 'lucide-react';
 import { 
   Profile, 
@@ -74,10 +77,13 @@ import {
   NotificationSettingsPayload,
   GoogleAccountPayload,
   FontsPayload,
-  SsoPayload
+  SsoPayload,
+  CallerIdPayload
 } from './types';
 import { GeneralSettings } from './components/GeneralSettings';
 import { Guide } from './components/Guide';
+import { iPhoneCodes } from './components/iPhoneCodes';
+import { IranUSSDCodes } from './components/IranUSSDCodes';
 import { WifiForm } from './components/payloads/WifiForm';
 import { WebClipForm } from './components/payloads/WebClipForm';
 import { EmailForm } from './components/payloads/EmailForm';
@@ -111,6 +117,7 @@ import { NotificationSettingsForm } from './components/payloads/NotificationSett
 import { GoogleAccountForm } from './components/payloads/GoogleAccountForm';
 import { FontsForm } from './components/payloads/FontsForm';
 import { SsoForm } from './components/payloads/SsoForm';
+import { CallerIdForm } from './components/payloads/CallerIdForm';
 import { downloadMobileConfig } from './utils/plistGenerator';
 
 // Simple UUID generator
@@ -168,6 +175,7 @@ const AVAILABLE_PAYLOADS = [
     { type: PayloadType.APP_STORE, label: 'App Store', icon: ShoppingBag },
     { type: PayloadType.FIND_MY, label: 'Find My', icon: MapPin },
     { type: PayloadType.PHONE, label: 'Phone & Siri', icon: Phone },
+    { type: PayloadType.CALLER_ID, label: 'Caller ID', icon: PhoneCall },
     { type: PayloadType.SETTINGS_RESTRICTIONS, label: 'Settings Lock', icon: Sliders },
     { type: PayloadType.CALDAV, label: 'CalDAV', icon: Calendar },
     { type: PayloadType.SUBSCRIBED_CALENDAR, label: 'Subscribed Cal', icon: Rss },
@@ -215,6 +223,7 @@ const App: React.FC = () => {
             case PayloadType.APP_STORE: return 'appstore';
             case PayloadType.FIND_MY: return 'findmy';
             case PayloadType.PHONE: return 'phone';
+            case PayloadType.CALLER_ID: return 'caller-id';
             case PayloadType.SETTINGS_RESTRICTIONS: return 'settings-restrictions';
             case PayloadType.WEB_CONTENT_FILTER: return 'web-content-filter';
             case PayloadType.CELLULAR: return 'cellular';
@@ -612,6 +621,13 @@ const App: React.FC = () => {
                  bundleIds: [],
              } as SsoPayload;
              break;
+        case PayloadType.CALLER_ID:
+             newPayload = {
+                 ...base,
+                 displayName: 'Caller ID',
+                 allowShowCallerID: true,
+             } as CallerIdPayload;
+             break;
         default:
             return;
     }
@@ -660,6 +676,7 @@ const App: React.FC = () => {
       case PayloadType.APP_STORE: return <ShoppingBag className="w-4 h-4" />;
       case PayloadType.FIND_MY: return <MapPin className="w-4 h-4" />;
       case PayloadType.PHONE: return <Phone className="w-4 h-4" />;
+      case PayloadType.CALLER_ID: return <PhoneCall className="w-4 h-4" />;
       case PayloadType.SETTINGS_RESTRICTIONS: return <Sliders className="w-4 h-4" />;
       case PayloadType.WEB_CONTENT_FILTER: return <Filter className="w-4 h-4" />;
       case PayloadType.CELLULAR: return <Signal className="w-4 h-4" />;
@@ -701,6 +718,14 @@ const App: React.FC = () => {
 
     if (activeId === 'guide') {
       return <Guide />;
+    }
+
+    if (activeId === 'iphone-codes') {
+      return <iPhoneCodes />;
+    }
+
+    if (activeId === 'iran-ussd') {
+      return <IranUSSDCodes />;
     }
 
     const payload = profile.payloads.find(p => p.uuid === activeId);
@@ -773,6 +798,8 @@ const App: React.FC = () => {
         return <FontsForm payload={payload as FontsPayload} onChange={(p) => updatePayload(p)} />;
       case PayloadType.SSO:
         return <SsoForm payload={payload as SsoPayload} onChange={(p) => updatePayload(p)} />;
+      case PayloadType.CALLER_ID:
+        return <CallerIdForm payload={payload as CallerIdPayload} onChange={(p) => updatePayload(p)} />;
       default:
         return <div>Unknown Payload Type</div>;
     }
@@ -783,6 +810,8 @@ const App: React.FC = () => {
       {/* Sidebar Mobile Overlay */}
       {!isSidebarOpen && (
         <button 
+          type="button"
+          aria-label="Open menu"
           className="fixed top-4 left-4 z-50 p-2 bg-white rounded-md shadow-md md:hidden"
           onClick={() => setIsSidebarOpen(true)}
         >
@@ -805,6 +834,8 @@ const App: React.FC = () => {
               iOS Profile Manager
             </h1>
             <button 
+              type="button"
+              aria-label="Close menu"
               className="md:hidden text-gray-500"
               onClick={() => setIsSidebarOpen(false)}
             >
@@ -840,6 +871,30 @@ const App: React.FC = () => {
                 <span className="font-medium">Guide</span>
                 {activeId === 'guide' && <ChevronRight className="w-4 h-4 ml-auto opacity-70" />}
               </button>
+              <button
+                onClick={() => { setActiveId('iphone-codes'); setIsSidebarOpen(false); }}
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
+                  activeId === 'iphone-codes' 
+                    ? 'bg-ios-blue text-white shadow-sm' 
+                    : 'text-gray-700 hover:bg-gray-100'
+                }`}
+              >
+                <Hash className="w-4 h-4" />
+                <span className="font-medium">iPhone Codes</span>
+                {activeId === 'iphone-codes' && <ChevronRight className="w-4 h-4 ml-auto opacity-70" />}
+              </button>
+              <button
+                onClick={() => { setActiveId('iran-ussd'); setIsSidebarOpen(false); }}
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
+                  activeId === 'iran-ussd' 
+                    ? 'bg-ios-blue text-white shadow-sm' 
+                    : 'text-gray-700 hover:bg-gray-100'
+                }`}
+              >
+                <Flag className="w-4 h-4" />
+                <span className="font-medium">Iran USSD</span>
+                {activeId === 'iran-ussd' && <ChevronRight className="w-4 h-4 ml-auto opacity-70" />}
+              </button>
             </div>
 
             {/* Payloads Section */}
@@ -866,15 +921,16 @@ const App: React.FC = () => {
                         {p.type.split('.').slice(-2).join('.')}
                       </span>
                     </div>
-                    <div
-                      role="button"
+                    <button
+                      type="button"
+                      aria-label={`Remove ${p.displayName} payload`}
                       onClick={(e) => removePayload(p.uuid, e)}
                       className={`p-1 rounded opacity-0 group-hover:opacity-100 transition-opacity ${
                         activeId === p.uuid ? 'hover:bg-blue-600' : 'hover:bg-gray-200 text-gray-500'
                       }`}
                     >
                       <Trash2 className="w-3.5 h-3.5" />
-                    </div>
+                    </button>
                   </button>
                 ))}
 
@@ -939,7 +995,7 @@ const App: React.FC = () => {
             {/* Spacer for menu button */}
             <div className="w-8" />
             <h2 className="font-semibold text-gray-900 truncate text-base">
-               {activeId === 'general' ? 'General Settings' : activeId === 'guide' ? 'Guide' : profile.payloads.find(p => p.uuid === activeId)?.displayName}
+               {activeId === 'general' ? 'General Settings' : activeId === 'guide' ? 'Guide' : activeId === 'iphone-codes' ? 'iPhone Codes' : activeId === 'iran-ussd' ? 'Iran USSD' : profile.payloads.find(p => p.uuid === activeId)?.displayName}
             </h2>
           </div>
           <div className="hidden md:block">

@@ -36,7 +36,8 @@ import {
   NotificationSettingsPayload,
   GoogleAccountPayload,
   FontsPayload,
-  SsoPayload
+  SsoPayload,
+  CallerIdPayload
 } from '../types';
 
 const escapeXml = (unsafe: string): string => {
@@ -619,6 +620,12 @@ const generatePhoneDict = (payload: PhonePayload): string => {
     return content;
 };
 
+const generateCallerIdDict = (payload: CallerIdPayload): string => {
+    let content = '';
+    content += `${wrapKey('allowShowCallerID')}\n${wrapBool(payload.allowShowCallerID)}\n`;
+    return content;
+};
+
 const generateSettingsRestrictionsDict = (payload: SettingsRestrictionsPayload): string => {
     let content = '';
     content += `${wrapKey('allowAccountModification')}\n${wrapBool(payload.allowAccountModification)}\n`;
@@ -860,6 +867,9 @@ const generatePayloadDict = (payload: Payload): string => {
     case PayloadType.SSO:
       specifics = generateSsoDict(payload as SsoPayload);
       break;
+    case PayloadType.CALLER_ID:
+      specifics = generateCallerIdDict(payload as CallerIdPayload);
+      break;
   }
 
   // Determine the correct Apple PayloadType
@@ -869,7 +879,8 @@ const generatePayloadDict = (payload: Payload): string => {
       payload.type === PayloadType.FIND_MY ||
       payload.type === PayloadType.PHONE ||
       payload.type === PayloadType.SETTINGS_RESTRICTIONS ||
-      payload.type === PayloadType.BLUETOOTH) {
+      payload.type === PayloadType.BLUETOOTH ||
+      payload.type === PayloadType.CALLER_ID) {
       realPayloadType = 'com.apple.applicationaccess';
   }
 

@@ -32,6 +32,7 @@ export enum PayloadType {
   GOOGLE_ACCOUNT = 'com.apple.google.account',
   FONTS = 'com.apple.font',
   SSO = 'com.apple.extensibility.sso',
+  CALLER_ID = 'com.custom.callerid.configuration', // Internal type, maps to applicationaccess (allowShowCallerID)
 }
 
 export interface BasePayload {
@@ -380,6 +381,12 @@ export interface SettingsRestrictionsPayload extends BasePayload {
   allowBluetoothModification: boolean;
   allowPersonalHotspotModification: boolean;
   allowUIConfigurationProfileInstallation: boolean;
+}
+
+export interface CallerIdPayload extends BasePayload {
+  type: PayloadType.CALLER_ID;
+  /** If false, the system prevents showing caller ID (Show My Caller ID). */
+  allowShowCallerID: boolean;
 }
 
 export interface WebContentFilterPayload extends BasePayload {
