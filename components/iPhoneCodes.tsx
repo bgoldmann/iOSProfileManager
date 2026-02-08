@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Hash, Copy, Check } from 'lucide-react';
+import { Hash as HashIcon, Copy, Check } from 'lucide-react';
 
 export interface DialCode {
   code: string;
@@ -121,7 +121,7 @@ export const iPhoneCodes: React.FC = () => {
       {CODES_BY_CATEGORY.map((section) => (
         <div key={section.title}>
           <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2 flex items-center gap-2">
-            <Hash className="w-4 h-4" />
+            <HashIcon className="w-4 h-4" />
             {section.title}
           </h3>
           <div className="bg-white rounded-xl shadow-sm border border-gray-200 divide-y divide-gray-100 px-4">

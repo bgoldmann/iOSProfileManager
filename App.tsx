@@ -873,6 +873,20 @@ const App: React.FC = () => {
               </button>
               <button
                 type="button"
+                data-section="iphone-codes"
+                onClick={() => { setActiveId('iphone-codes'); setIsSidebarOpen(false); }}
+                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
+                  activeId === 'iphone-codes' 
+                    ? 'bg-ios-blue text-white shadow-sm' 
+                    : 'text-gray-700 hover:bg-gray-100'
+                }`}
+              >
+                <Hash className="w-4 h-4 shrink-0" />
+                <span className="font-medium">iPhone Codes</span>
+                {activeId === 'iphone-codes' && <ChevronRight className="w-4 h-4 ml-auto opacity-70" />}
+              </button>
+              <button
+                type="button"
                 onClick={() => { setActiveId('guide'); setIsSidebarOpen(false); }}
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
                   activeId === 'guide' 
@@ -883,19 +897,6 @@ const App: React.FC = () => {
                 <HelpCircle className="w-4 h-4" />
                 <span className="font-medium">Guide</span>
                 {activeId === 'guide' && <ChevronRight className="w-4 h-4 ml-auto opacity-70" />}
-              </button>
-              <button
-                type="button"
-                onClick={() => { setActiveId('iphone-codes'); setIsSidebarOpen(false); }}
-                className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
-                  activeId === 'iphone-codes' 
-                    ? 'bg-ios-blue text-white shadow-sm' 
-                    : 'text-gray-700 hover:bg-gray-100'
-                }`}
-              >
-                <Hash className="w-4 h-4" />
-                <span className="font-medium">iPhone Codes</span>
-                {activeId === 'iphone-codes' && <ChevronRight className="w-4 h-4 ml-auto opacity-70" />}
               </button>
               <button
                 type="button"
@@ -1043,8 +1044,8 @@ const App: React.FC = () => {
         </header>
 
         {/* Form Container */}
-        <div className="flex-1 overflow-y-auto p-4 sm:p-8" ref={mainContentRef}>
-           <div className="max-w-3xl mx-auto pb-12 min-h-0">
+        <div className="flex-1 overflow-y-auto overflow-x-hidden p-4 sm:p-8" ref={mainContentRef}>
+           <div className="max-w-3xl mx-auto pb-12 min-h-[60vh]" data-active-section={activeId}>
              {renderActiveContent()}
            </div>
         </div>

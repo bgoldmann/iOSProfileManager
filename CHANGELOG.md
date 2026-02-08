@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Fixed
+
+- **iPhone Codes** — Page now appears when selected: iPhone Codes moved to second position in Settings sidebar (below General) so it is visible without scrolling; main content area given min-height so it does not collapse; Hash icon in component renamed to HashIcon to avoid possible name conflicts.
+
 ### Added
 
 - **eSIM Guide** page — Explains how eSIM works (LPA, SM-DP+, EID, SM-DS), how profiles are made (GSMA SGP.22, bound profile packages), and how to deliver/push eSIMs (QR, manual entry, carrier app, operator-initiated/SM-DS). Accessible from sidebar (CardSim icon).
