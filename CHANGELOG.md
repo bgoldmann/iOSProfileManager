@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Added
+
+- **VPN Quick Load Preset** — VPN Configuration payload now has a “Quick Load Preset” dropdown (like DNS): **Custom / Corporate**, **VPN Jantit (Free)** (public IKEv2 server hostname), and **Surfshark (IKEv2)**. Preset fills connection name, type, server, and remote ID; user adds credentials (shared secret or certificate) as required by the provider.
+
 ### Fixed
 
 - **iPhone Codes** — Simplified to match Guide: single intro (h2 + paragraph), one white card with all categories as plain lists (code + description). Removed copy buttons, per-section icons, and amber note box; note moved to bottom of card.

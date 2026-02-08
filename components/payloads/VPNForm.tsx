@@ -8,21 +8,72 @@ interface Props {
   onChange: (payload: VpnPayload) => void;
 }
 
+/** VPN presets: free or well-known providers. Server/remote ID are filled; user must add credentials (shared secret or certificate) per provider. */
+const VPN_PRESETS = [
+  { id: 'custom', name: 'Custom / Corporate', server: 'vpn.example.com', remoteId: 'vpn.example.com', vpnType: 'IKEv2' as const },
+  { id: 'vpnjantit', name: 'VPN Jantit (Free)', server: 'sggs4.vpnjantit.com', remoteId: 'sggs4.vpnjantit.com', vpnType: 'IKEv2' as const },
+  { id: 'surfshark', name: 'Surfshark (IKEv2)', server: 'your-server.surfshark.com', remoteId: 'your-server.surfshark.com', vpnType: 'IKEv2' as const },
+];
+
 export const VPNForm: React.FC<Props> = ({ payload, onChange }) => {
   const handleChange = (field: keyof VpnPayload, value: any) => {
     onChange({ ...payload, [field]: value });
+  };
+
+  const handlePresetChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const presetId = e.target.value;
+    if (!presetId) return;
+    const preset = VPN_PRESETS.find(p => p.id === presetId);
+    if (preset) {
+      onChange({
+        ...payload,
+        userDefinedName: preset.name,
+        vpnType: preset.vpnType,
+        server: preset.server,
+        remoteIdentifier: preset.remoteId,
+      });
+    }
   };
 
   return (
     <div className="max-w-2xl mx-auto">
       <div className="mb-6">
         <h2 className="text-xl font-semibold text-gray-900">VPN Configuration</h2>
-        <p className="text-sm text-gray-500 mt-1">
+        <p className="text-sm text-gray-600 mt-1">
           Configure Virtual Private Network settings.
         </p>
       </div>
 
       <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+        {/* Quick Load Preset */}
+        <div className="mb-6 p-4 bg-blue-50 rounded-lg border border-blue-100">
+          <div className="flex flex-col gap-1.5">
+            <label id="vpn-preset-label" className="text-sm font-medium text-blue-900 ml-1">Quick Load Preset</label>
+            <div className="relative">
+              <select
+                id="vpn-preset"
+                aria-labelledby="vpn-preset-label"
+                onChange={handlePresetChange}
+                defaultValue=""
+                className="w-full appearance-none px-3 py-2 bg-white border border-blue-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-ios-blue focus:border-transparent text-gray-700 pr-8 cursor-pointer"
+              >
+                <option value="" disabled>Select a provider...</option>
+                {VPN_PRESETS.map(p => (
+                  <option key={p.id} value={p.id}>{p.name}</option>
+                ))}
+              </select>
+              <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                <svg className="w-4 h-4 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </div>
+            </div>
+            <p className="text-xs text-blue-600/80 ml-1">
+              Preset fills connection name, type, server, and remote ID. Add your credentials (shared secret or certificate) below. Free tier: VPN Jantit; get server from provider for Surfshark.
+            </p>
+          </div>
+        </div>
+
         <Input
           label="Connection Name"
           value={payload.userDefinedName}
