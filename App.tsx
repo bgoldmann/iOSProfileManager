@@ -857,14 +857,14 @@ const App: React.FC = () => {
           <div className="flex-1 overflow-y-auto p-3 space-y-6">
             {/* General Section */}
             <div>
-              <h3 className="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-2 px-2">Settings</h3>
+              <p className="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-2 px-2" role="text">Settings</p>
               <button
                 type="button"
                 onClick={() => { setActiveId('general'); setIsSidebarOpen(false); }}
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
                   activeId === 'general' 
                     ? 'bg-ios-blue text-white shadow-sm' 
-                    : 'text-gray-800 hover:bg-gray-100'
+                    : 'text-gray-900 hover:bg-gray-100'
                 }`}
               >
                 <Settings className="w-4 h-4" />
@@ -878,7 +878,7 @@ const App: React.FC = () => {
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
                   activeId === 'iphone-codes' 
                     ? 'bg-ios-blue text-white shadow-sm' 
-                    : 'text-gray-800 hover:bg-gray-100'
+                    : 'text-gray-900 hover:bg-gray-100'
                 }`}
               >
                 <Hash className="w-4 h-4 shrink-0" />
@@ -891,7 +891,7 @@ const App: React.FC = () => {
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
                   activeId === 'guide' 
                     ? 'bg-ios-blue text-white shadow-sm' 
-                    : 'text-gray-800 hover:bg-gray-100'
+                    : 'text-gray-900 hover:bg-gray-100'
                 }`}
               >
                 <HelpCircle className="w-4 h-4" />
@@ -904,7 +904,7 @@ const App: React.FC = () => {
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
                   activeId === 'iran-ussd' 
                     ? 'bg-ios-blue text-white shadow-sm' 
-                    : 'text-gray-800 hover:bg-gray-100'
+                    : 'text-gray-900 hover:bg-gray-100'
                 }`}
               >
                 <Flag className="w-4 h-4" />
@@ -917,7 +917,7 @@ const App: React.FC = () => {
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
                   activeId === 'esim-guide' 
                     ? 'bg-ios-blue text-white shadow-sm' 
-                    : 'text-gray-800 hover:bg-gray-100'
+                    : 'text-gray-900 hover:bg-gray-100'
                 }`}
               >
                 <CardSim className="w-4 h-4" />
@@ -929,7 +929,7 @@ const App: React.FC = () => {
             {/* Payloads Section */}
             <div>
               <div className="flex items-center justify-between px-2 mb-2">
-                <h3 className="text-xs font-semibold text-gray-600 uppercase tracking-wider">Configured Payloads</h3>
+                <p className="text-xs font-semibold text-gray-600 uppercase tracking-wider" role="text">Configured Payloads</p>
               </div>
               
               <div className="space-y-1">
@@ -940,7 +940,7 @@ const App: React.FC = () => {
                     className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors group ${
                       activeId === p.uuid 
                         ? 'bg-ios-blue text-white shadow-sm' 
-                        : 'text-gray-800 hover:bg-gray-100'
+                        : 'text-gray-900 hover:bg-gray-100'
                     }`}
                   >
                     {getPayloadIcon(p.type)}
