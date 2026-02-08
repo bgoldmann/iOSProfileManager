@@ -864,7 +864,7 @@ const App: React.FC = () => {
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
                   activeId === 'general' 
                     ? 'bg-ios-blue text-white shadow-sm' 
-                    : 'text-gray-700 hover:bg-gray-100'
+                    : 'text-gray-800 hover:bg-gray-100'
                 }`}
               >
                 <Settings className="w-4 h-4" />
@@ -878,7 +878,7 @@ const App: React.FC = () => {
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
                   activeId === 'iphone-codes' 
                     ? 'bg-ios-blue text-white shadow-sm' 
-                    : 'text-gray-700 hover:bg-gray-100'
+                    : 'text-gray-800 hover:bg-gray-100'
                 }`}
               >
                 <Hash className="w-4 h-4 shrink-0" />
@@ -891,7 +891,7 @@ const App: React.FC = () => {
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
                   activeId === 'guide' 
                     ? 'bg-ios-blue text-white shadow-sm' 
-                    : 'text-gray-700 hover:bg-gray-100'
+                    : 'text-gray-800 hover:bg-gray-100'
                 }`}
               >
                 <HelpCircle className="w-4 h-4" />
@@ -904,7 +904,7 @@ const App: React.FC = () => {
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
                   activeId === 'iran-ussd' 
                     ? 'bg-ios-blue text-white shadow-sm' 
-                    : 'text-gray-700 hover:bg-gray-100'
+                    : 'text-gray-800 hover:bg-gray-100'
                 }`}
               >
                 <Flag className="w-4 h-4" />
@@ -917,7 +917,7 @@ const App: React.FC = () => {
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
                   activeId === 'esim-guide' 
                     ? 'bg-ios-blue text-white shadow-sm' 
-                    : 'text-gray-700 hover:bg-gray-100'
+                    : 'text-gray-800 hover:bg-gray-100'
                 }`}
               >
                 <CardSim className="w-4 h-4" />
@@ -940,7 +940,7 @@ const App: React.FC = () => {
                     className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors group ${
                       activeId === p.uuid 
                         ? 'bg-ios-blue text-white shadow-sm' 
-                        : 'text-gray-700 hover:bg-gray-100'
+                        : 'text-gray-800 hover:bg-gray-100'
                     }`}
                   >
                     {getPayloadIcon(p.type)}
@@ -1035,7 +1035,7 @@ const App: React.FC = () => {
 
           <button
             onClick={() => downloadMobileConfig(profile)}
-            className="flex items-center gap-2 bg-ios-blue hover:bg-blue-600 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors shadow-sm"
+            className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors shadow-sm"
           >
             <Download className="w-4 h-4 shrink-0" aria-hidden />
             <span className="hidden sm:inline text-white">Download Profile</span>
