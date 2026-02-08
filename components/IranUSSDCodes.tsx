@@ -168,7 +168,7 @@ function CodeRow({
       <button
         type="button"
         onClick={handleCopy}
-        className="shrink-0 p-2 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-ios-blue transition-colors"
+        className="shrink-0 p-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-ios-blue transition-colors"
         title="Copy code"
         aria-label={`Copy ${code.replace(/\[.*?\]/g, '').trim()} to clipboard`}
       >
@@ -203,15 +203,15 @@ export const IranUSSDCodes: React.FC = () => {
       {IRAN_CARRIERS.map((section) => (
         <div key={section.carrier} className="space-y-4">
           <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2">
-            <Flag className="w-5 h-5 text-gray-500" />
+            <Flag className="w-5 h-5 text-gray-600" />
             {section.carrier}
             {section.subtitle && (
-              <span className="text-sm font-normal text-gray-500">({section.subtitle})</span>
+              <span className="text-sm font-normal text-gray-600">({section.subtitle})</span>
             )}
           </h3>
           {section.categories.map((cat) => (
             <div key={cat.title}>
-              <h4 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">
+              <h4 className="text-xs font-semibold text-gray-600 uppercase tracking-wider mb-2">
                 {cat.title}
               </h4>
               <div className="bg-white rounded-xl shadow-sm border border-gray-200 px-4 divide-y divide-gray-100">

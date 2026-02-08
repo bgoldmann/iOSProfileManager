@@ -863,7 +863,7 @@ const App: React.FC = () => {
                 onClick={() => { setActiveId('general'); setIsSidebarOpen(false); }}
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
                   activeId === 'general' 
-                    ? 'bg-ios-blue text-white shadow-sm' 
+                    ? 'bg-blue-600 text-white shadow-sm' 
                     : 'text-gray-900 hover:bg-gray-100'
                 }`}
               >
@@ -877,7 +877,7 @@ const App: React.FC = () => {
                 onClick={() => { setActiveId('iphone-codes'); setIsSidebarOpen(false); }}
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
                   activeId === 'iphone-codes' 
-                    ? 'bg-ios-blue text-white shadow-sm' 
+                    ? 'bg-blue-600 text-white shadow-sm' 
                     : 'text-gray-900 hover:bg-gray-100'
                 }`}
               >
@@ -890,7 +890,7 @@ const App: React.FC = () => {
                 onClick={() => { setActiveId('guide'); setIsSidebarOpen(false); }}
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
                   activeId === 'guide' 
-                    ? 'bg-ios-blue text-white shadow-sm' 
+                    ? 'bg-blue-600 text-white shadow-sm' 
                     : 'text-gray-900 hover:bg-gray-100'
                 }`}
               >
@@ -903,7 +903,7 @@ const App: React.FC = () => {
                 onClick={() => { setActiveId('iran-ussd'); setIsSidebarOpen(false); }}
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
                   activeId === 'iran-ussd' 
-                    ? 'bg-ios-blue text-white shadow-sm' 
+                    ? 'bg-blue-600 text-white shadow-sm' 
                     : 'text-gray-900 hover:bg-gray-100'
                 }`}
               >
@@ -916,7 +916,7 @@ const App: React.FC = () => {
                 onClick={() => { setActiveId('esim-guide'); setIsSidebarOpen(false); }}
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors ${
                   activeId === 'esim-guide' 
-                    ? 'bg-ios-blue text-white shadow-sm' 
+                    ? 'bg-blue-600 text-white shadow-sm' 
                     : 'text-gray-900 hover:bg-gray-100'
                 }`}
               >
@@ -939,7 +939,7 @@ const App: React.FC = () => {
                     onClick={() => { setActiveId(p.uuid); setIsSidebarOpen(false); }}
                     className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm transition-colors group ${
                       activeId === p.uuid 
-                        ? 'bg-ios-blue text-white shadow-sm' 
+                        ? 'bg-blue-600 text-white shadow-sm' 
                         : 'text-gray-900 hover:bg-gray-100'
                     }`}
                   >
