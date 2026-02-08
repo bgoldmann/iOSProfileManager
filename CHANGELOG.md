@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- **Global HTTP Proxy Quick Load Preset** — Global HTTP Proxy payload now has a “Quick Load Preset” dropdown: **Custom / Corporate (Manual)** (proxy.example.com:8080), **Local testing (Manual)** (127.0.0.1:8888), and **Automatic (PAC URL)** (http://wpad/wpad.dat). Helper text notes that public proxy lists change often and to use a stable corporate or trusted proxy.
 - **VPN Quick Load Preset** — VPN Configuration payload now has a “Quick Load Preset” dropdown (like DNS): **Custom / Corporate**, **VPN Jantit (Free)** (public IKEv2 server hostname), and **Surfshark (IKEv2)**. Preset fills connection name, type, server, and remote ID; user adds credentials (shared secret or certificate) as required by the provider.
 
 ### Fixed
