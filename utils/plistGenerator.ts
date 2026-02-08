@@ -320,6 +320,36 @@ const generateDnsDict = (payload: DnsPayload): string => {
        }
   }
 
+  if (payload.allowFailover === true) {
+      dnsSettings += `${wrapKey('AllowFailover')}\n${wrapBool(true)}\n`;
+  }
+
+  if (payload.payloadCertificateUUID) {
+      dnsSettings += `${wrapKey('PayloadCertificateUUID')}\n${wrapString(payload.payloadCertificateUUID)}\n`;
+  }
+
+  if (payload.onDemandRules && payload.onDemandRules.length > 0) {
+      dnsSettings += `${wrapKey('OnDemandRules')}\n\t\t<array>\n`;
+      for (const rule of payload.onDemandRules) {
+          dnsSettings += '\t\t\t<dict>\n';
+          dnsSettings += `\t\t\t\t<key>Action</key>\n\t\t\t\t<string>${escapeXml(rule.action)}</string>\n`;
+          if (rule.ssidMatch) {
+              const ssids = rule.ssidMatch.split(',').map(s => s.trim()).filter(Boolean);
+              if (ssids.length > 0) {
+                  dnsSettings += `\t\t\t\t<key>SSIDMatch</key>\n\t\t\t\t<array>\n${ssids.map(s => `\t\t\t\t\t<string>${escapeXml(s)}</string>`).join('\n')}\n\t\t\t\t</array>\n`;
+              }
+          }
+          if (rule.interfaceTypeMatch) {
+              dnsSettings += `\t\t\t\t<key>InterfaceTypeMatch</key>\n\t\t\t\t<string>${escapeXml(rule.interfaceTypeMatch)}</string>\n`;
+          }
+          if (rule.urlStringProbe) {
+              dnsSettings += `\t\t\t\t<key>URLStringProbe</key>\n\t\t\t\t<string>${escapeXml(rule.urlStringProbe)}</string>\n`;
+          }
+          dnsSettings += '\t\t\t</dict>\n';
+      }
+      dnsSettings += '\t\t</array>\n';
+  }
+
   let content = '';
   content += `${wrapKey('DNSSettings')}\n\t\t<dict>\n${dnsSettings}\t\t</dict>\n`;
   content += `${wrapKey('ProhibitDisablement')}\n${wrapBool(payload.prohibitDisablement)}\n`;

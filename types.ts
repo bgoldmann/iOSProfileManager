@@ -167,6 +167,14 @@ export interface CertificatePayload extends BasePayload {
   payloadContent: string; // Base64 DER data
 }
 
+/** One rule in DNS OnDemandRules (same semantics as VPN OnDemandRules). */
+export interface DnsOnDemandRule {
+  action: 'Connect' | 'Disconnect' | 'EvaluateConnection';
+  ssidMatch?: string;       // Comma-separated for UI → array in plist
+  interfaceTypeMatch?: string; // e.g. WiFi, Cellular
+  urlStringProbe?: string;
+}
+
 export interface DnsPayload extends BasePayload {
   type: PayloadType.DNS;
   dnsProtocol: 'HTTPS' | 'TLS';
@@ -175,6 +183,12 @@ export interface DnsPayload extends BasePayload {
   serverAddresses: string; // Comma separated for UI
   supplementalMatchDomains: string; // Comma separated for UI
   prohibitDisablement: boolean;
+  /** Allow failover to system DNS (iOS 26+ / visionOS 26+). */
+  allowFailover?: boolean;
+  /** UUID of a Certificate payload for TLS client authentication (iOS 16+). */
+  payloadCertificateUUID?: string;
+  /** When to apply DNS (e.g. on specific Wi‑Fi). If empty, DNS is always applied. */
+  onDemandRules?: DnsOnDemandRule[];
 }
 
 export interface CalDavPayload extends BasePayload {

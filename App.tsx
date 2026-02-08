@@ -369,6 +369,8 @@ const App: React.FC = () => {
                  serverAddresses: '',
                  supplementalMatchDomains: '',
                  prohibitDisablement: false,
+                 allowFailover: false,
+                 onDemandRules: [],
              } as DnsPayload;
              break;
         case PayloadType.CALDAV:

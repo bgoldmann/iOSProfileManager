@@ -15,6 +15,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- **DNS payload expansion** — Encrypted DNS payload now supports: **Allow Failover** (iOS 26+), **Payload Certificate UUID** (TLS client auth, iOS 16+), and **On-Demand Rules** (when to apply DNS: Connect / Disconnect / EvaluateConnection with optional SSID match, interface type match, URL probe). Same semantics as VPN on-demand (e.g. apply only on specific Wi‑Fi).
 - **eSIM Guide** page — Explains how eSIM works (LPA, SM-DP+, EID, SM-DS), how profiles are made (GSMA SGP.22, bound profile packages), and how to deliver/push eSIMs (QR, manual entry, carrier app, operator-initiated/SM-DS). Accessible from sidebar (CardSim icon).
 - **Iran USSD** page — USSD codes for Iranian carriers: Irancell (ایرانسل), Hamrah-e Aval / MCI (همراه اول), and Rightel (رایتل). Balance, top-up, data packages, internet activation, and other services per carrier. Copy-to-clipboard; accessible from sidebar (Flag icon).
 - **iPhone Codes** page — reference list of iPhone dial codes (e.g. `*#06#` for IMEI, `*3001#12345#*` for Field Test Mode). Categories: device info, network & signal, call forwarding, call features, carrier/billing. Copy-to-clipboard for each code; accessible from sidebar (Hash icon).
