@@ -190,7 +190,7 @@ export const IranUSSDCodes: React.FC = () => {
     <div className="max-w-2xl mx-auto space-y-8">
       <div>
         <h2 className="text-xl font-semibold text-gray-900 mb-1">USSD codes — Iranian carriers</h2>
-        <p className="text-sm text-gray-500 mb-4">
+        <p className="text-sm text-gray-600 mb-4">
           USSD codes for Irancell, Hamrah-e Aval (MCI), and Rightel. Dial these in the Phone app; availability may depend on your plan and region. Codes are typically free.
         </p>
         <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6">
@@ -230,7 +230,7 @@ export const IranUSSDCodes: React.FC = () => {
       ))}
 
       {lastCopied && (
-        <p className="text-xs text-gray-400 text-center">
+        <p className="text-xs text-gray-600 text-center">
           Copied <code className="bg-gray-100 px-1 rounded">{lastCopied}</code> — paste in the Phone keypad.
         </p>
       )}

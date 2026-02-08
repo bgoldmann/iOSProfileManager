@@ -17,7 +17,7 @@ export const GeneralSettings: React.FC<Props> = ({ metadata, onChange }) => {
     <div className="max-w-2xl mx-auto">
       <div className="mb-6">
         <h2 className="text-xl font-semibold text-gray-900">General Settings</h2>
-        <p className="text-sm text-gray-500 mt-1">
+        <p className="text-sm text-gray-600 mt-1">
           These settings apply to the profile itself and help identify it on the device.
         </p>
       </div>
@@ -53,7 +53,7 @@ export const GeneralSettings: React.FC<Props> = ({ metadata, onChange }) => {
         />
         
         <div className="pt-2">
-            <p className="text-xs text-gray-400 font-mono">UUID: {metadata.uuid}</p>
+            <p className="text-xs text-gray-600 font-mono">UUID: {metadata.uuid}</p>
         </div>
       </div>
     </div>

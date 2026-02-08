@@ -6,7 +6,7 @@ export const ESimGuide: React.FC = () => {
     <div className="max-w-2xl mx-auto space-y-6">
       <div>
         <h2 className="text-xl font-semibold text-gray-900 mb-1">eSIM: how it works, how it’s made, how to push</h2>
-        <p className="text-sm text-gray-500 mb-4">
+        <p className="text-sm text-gray-600 mb-4">
           A short technical overview of embedded SIM (eSIM): the main components, how profiles are created and delivered, and the ways carriers “push” or activate eSIMs on your device.
         </p>
       </div>
@@ -58,7 +58,7 @@ export const ESimGuide: React.FC = () => {
             <li><strong>Security</strong> — PKI (certificates), mutual authentication between eUICC and SM-DP+, and encryption. GSMA defines the certificate chains (e.g. GSMA root CI).</li>
             <li><strong>Download flow</strong> — Typically: mutual authentication → PrepareDownload → GetBoundProfilePackage → secure channel → install on eUICC.</li>
           </ul>
-          <p className="text-xs text-gray-500 pt-1">
+          <p className="text-xs text-gray-600 pt-1">
             This app creates <strong>iOS configuration profiles</strong> (.mobileconfig) for Wi‑Fi, VPN, restrictions, etc. Those are different from eSIM profiles; eSIM lives on the cellular chip and is provisioned via SM-DP+/LPA, not via a .mobileconfig file.
           </p>
         </div>

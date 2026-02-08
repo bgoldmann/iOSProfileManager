@@ -86,7 +86,7 @@ function CodeRow({ code, description, onCopy }: { code: string; description: str
       <button
         type="button"
         onClick={handleCopy}
-        className="shrink-0 p-2 rounded-lg text-gray-500 hover:bg-gray-100 hover:text-ios-blue transition-colors"
+        className="shrink-0 p-2 rounded-lg text-gray-600 hover:bg-gray-100 hover:text-ios-blue transition-colors"
         title="Copy code"
         aria-label={`Copy ${code} to clipboard`}
       >
@@ -108,7 +108,7 @@ export const iPhoneCodes: React.FC = () => {
     <div className="max-w-2xl mx-auto space-y-6">
       <div>
         <h2 className="text-xl font-semibold text-gray-900 mb-1">iPhone dial codes</h2>
-        <p className="text-sm text-gray-500 mb-4">
+        <p className="text-sm text-gray-600 mb-4">
           Secret codes you can enter in the <strong>Phone</strong> app dialer. Open Phone, tap the keypad, enter the code exactly, then press Call (or they may run when you type the final #). Availability depends on carrier and iOS version.
         </p>
         <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 mb-6">
@@ -120,7 +120,7 @@ export const iPhoneCodes: React.FC = () => {
 
       {CODES_BY_CATEGORY.map((section) => (
         <div key={section.title}>
-          <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-2 flex items-center gap-2">
+          <h3 className="text-sm font-semibold text-gray-600 uppercase tracking-wider mb-2 flex items-center gap-2">
             <HashIcon className="w-4 h-4" />
             {section.title}
           </h3>
@@ -138,7 +138,7 @@ export const iPhoneCodes: React.FC = () => {
       ))}
 
       {lastCopied && (
-        <p className="text-xs text-gray-400 text-center">
+        <p className="text-xs text-gray-600 text-center">
           Copied <code className="bg-gray-100 px-1 rounded">{lastCopied}</code> to clipboard — paste in the Phone keypad.
         </p>
       )}

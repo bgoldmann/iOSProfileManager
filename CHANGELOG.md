@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Fixed
 
+- **WCAG 2 AA contrast** — Sidebar section headings (Settings, Configured Payloads, Add New Payload), payload subtitles, empty states, search icon, and header “Editing” label use `text-gray-600` instead of `text-gray-400`/`text-gray-500` for minimum 4.5:1 contrast on light backgrounds. Download button labels use explicit `text-white`. Guide, General Settings, iPhone Codes, Iran USSD, and eSIM Guide body and secondary text updated to `text-gray-600` where needed.
 - **iPhone Codes** — Page now appears when selected: iPhone Codes moved to second position in Settings sidebar (below General) so it is visible without scrolling; main content area given min-height so it does not collapse; Hash icon in component renamed to HashIcon to avoid possible name conflicts.
 
 ### Added

@@ -6,7 +6,7 @@ export const Guide: React.FC = () => {
       {/* How profiles work */}
       <div>
         <h2 className="text-xl font-semibold text-gray-900 mb-1">How profiles work</h2>
-        <p className="text-sm text-gray-500 mb-4">
+        <p className="text-sm text-gray-600 mb-4">
           iOS configuration profiles are settings bundles you install on iPhone, iPad, and other Apple devices to configure behavior without changing each setting manually.
         </p>
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 space-y-4">
@@ -38,7 +38,7 @@ export const Guide: React.FC = () => {
       {/* How to install on iOS */}
       <div>
         <h2 className="text-xl font-semibold text-gray-900 mb-1">How to install on iOS</h2>
-        <p className="text-sm text-gray-500 mb-4">
+        <p className="text-sm text-gray-600 mb-4">
           Follow these steps to install a profile on your iPhone or iPad.
         </p>
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
@@ -50,7 +50,7 @@ export const Guide: React.FC = () => {
             <li>Tap <strong>Install</strong> again to confirm.</li>
             <li>The profile appears under <strong>Settings → General → VPN &amp; Device Management</strong>.</li>
           </ol>
-          <p className="mt-4 text-xs text-gray-500">
+          <p className="mt-4 text-xs text-gray-600">
             <strong>Tip:</strong> For install-from-URL, iOS requires HTTPS. Use Safari on the device for the best native install prompt; some browsers may download the file instead.
           </p>
         </div>
@@ -59,7 +59,7 @@ export const Guide: React.FC = () => {
       {/* FAQ */}
       <div>
         <h2 className="text-xl font-semibold text-gray-900 mb-1">FAQ</h2>
-        <p className="text-sm text-gray-500 mb-4">
+        <p className="text-sm text-gray-600 mb-4">
           Common questions about iOS configuration profiles.
         </p>
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 divide-y divide-gray-100">
