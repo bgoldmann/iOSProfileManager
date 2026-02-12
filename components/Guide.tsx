@@ -101,6 +101,28 @@ export const Guide: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Privacy & trust */}
+      <div>
+        <h2 className="text-xl font-semibold text-gray-900 mb-1">Privacy &amp; trust</h2>
+        <p className="text-sm text-gray-600 mb-4">
+          This tool is designed to be transparent and privacy-respecting.
+        </p>
+        <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-6 space-y-4">
+          <div>
+            <h3 className="text-sm font-semibold text-gray-800 mb-1">Client-side only</h3>
+            <p className="text-sm text-gray-600">
+              All profile building and export happens in your browser. Your profile data, Wi‑Fi passwords, and other settings never leave your device. No account or login is required.
+            </p>
+          </div>
+          <div>
+            <h3 className="text-sm font-semibold text-gray-800 mb-1">References</h3>
+            <p className="text-sm text-gray-600">
+              Payload types and behavior follow Apple&apos;s documentation. For full details, see <a href="https://support.apple.com/guide/deployment/payload-list-for-iphone-and-ipad-depdca795ebd/web" target="_blank" rel="noopener noreferrer" className="text-ios-blue hover:underline">Apple&apos;s payload list</a> and <a href="https://mosen.github.io/profiledocs/payloads/" target="_blank" rel="noopener noreferrer" className="text-ios-blue hover:underline">ProfileDocs</a>.
+            </p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

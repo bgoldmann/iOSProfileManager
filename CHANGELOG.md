@@ -8,6 +8,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ### Added
 
+- **SEO (2026)** — Open Graph image dimensions (`og:image:width`, `og:image:height`) and alt text (`og:image:alt`, `twitter:image:alt`) for predictable social previews. Preconnect hints for Google Fonts (`fonts.googleapis.com`, `fonts.gstatic.com`) to improve LCP. Organization JSON-LD schema for site-wide identity. New `index.css` for root layout and font-family (referenced in HTML). Guide: “Privacy & trust” section with client-side-only explanation and links to Apple payload list and ProfileDocs. Payload form components are lazy-loaded (code-split) so the initial bundle is smaller and INP improves; a “Loading…” fallback is shown while a form chunk loads. `.env.example` updated to state that `VITE_APP_URL` is required for production SEO.
 - **Global HTTP Proxy Quick Load Preset** — Global HTTP Proxy payload now has a “Quick Load Preset” dropdown: **Custom / Corporate (Manual)** (proxy.example.com:8080), **Local testing (Manual)** (127.0.0.1:8888), and **Automatic (PAC URL)** (http://wpad/wpad.dat). Helper text notes that public proxy lists change often and to use a stable corporate or trusted proxy.
 - **VPN Quick Load Preset** — VPN Configuration payload now has a “Quick Load Preset” dropdown (like DNS): **Custom / Corporate**, **VPN Jantit (Free)** (public IKEv2 server hostname), and **Surfshark (IKEv2)**. Preset fills connection name, type, server, and remote ID; user adds credentials (shared secret or certificate) as required by the provider.
 

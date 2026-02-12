@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, Suspense, lazy } from 'react';
 import { 
   Settings, 
   Wifi, 
@@ -86,41 +86,43 @@ import { Guide } from './components/Guide';
 import { iPhoneCodes } from './components/iPhoneCodes';
 import { IranUSSDCodes } from './components/IranUSSDCodes';
 import { ESimGuide } from './components/ESimGuide';
-import { WifiForm } from './components/payloads/WifiForm';
-import { WebClipForm } from './components/payloads/WebClipForm';
-import { EmailForm } from './components/payloads/EmailForm';
-import { PasscodeForm } from './components/payloads/PasscodeForm';
-import { RestrictionsForm } from './components/payloads/RestrictionsForm';
-import { VPNForm } from './components/payloads/VPNForm';
-import { CertificateForm } from './components/payloads/CertificateForm';
-import { DnsForm } from './components/payloads/DnsForm';
-import { CalDavForm } from './components/payloads/CalDavForm';
-import { SubscribedCalendarForm } from './components/payloads/SubscribedCalendarForm';
-import { LdapForm } from './components/payloads/LdapForm';
-import { CameraForm } from './components/payloads/CameraForm';
-import { AppLockForm } from './components/payloads/AppLockForm';
-import { MdmForm } from './components/payloads/MdmForm';
-import { AppStoreForm } from './components/payloads/AppStoreForm';
-import { FindMyForm } from './components/payloads/FindMyForm';
-import { PhoneForm } from './components/payloads/PhoneForm';
-import { SettingsRestrictionsForm } from './components/payloads/SettingsRestrictionsForm';
-import { WebContentFilterForm } from './components/payloads/WebContentFilterForm';
-import { CellularForm } from './components/payloads/CellularForm';
-import { BluetoothForm } from './components/payloads/BluetoothForm';
-import { GlobalHttpProxyForm } from './components/payloads/GlobalHttpProxyForm';
-import { CardDavForm } from './components/payloads/CardDavForm';
-import { LockScreenForm } from './components/payloads/LockScreenForm';
-import { ExchangeEasForm } from './components/payloads/ExchangeEasForm';
-import { SafariForm } from './components/payloads/SafariForm';
-import { ScepForm } from './components/payloads/ScepForm';
-import { DomainsForm } from './components/payloads/DomainsForm';
-import { AirPrintForm } from './components/payloads/AirPrintForm';
-import { NotificationSettingsForm } from './components/payloads/NotificationSettingsForm';
-import { GoogleAccountForm } from './components/payloads/GoogleAccountForm';
-import { FontsForm } from './components/payloads/FontsForm';
-import { SsoForm } from './components/payloads/SsoForm';
-import { CallerIdForm } from './components/payloads/CallerIdForm';
 import { downloadMobileConfig } from './utils/plistGenerator';
+
+// Lazy-load payload forms for smaller initial bundle and better INP
+const WifiForm = lazy(() => import('./components/payloads/WifiForm').then(m => ({ default: m.WifiForm })));
+const WebClipForm = lazy(() => import('./components/payloads/WebClipForm').then(m => ({ default: m.WebClipForm })));
+const EmailForm = lazy(() => import('./components/payloads/EmailForm').then(m => ({ default: m.EmailForm })));
+const PasscodeForm = lazy(() => import('./components/payloads/PasscodeForm').then(m => ({ default: m.PasscodeForm })));
+const RestrictionsForm = lazy(() => import('./components/payloads/RestrictionsForm').then(m => ({ default: m.RestrictionsForm })));
+const VPNForm = lazy(() => import('./components/payloads/VPNForm').then(m => ({ default: m.VPNForm })));
+const CertificateForm = lazy(() => import('./components/payloads/CertificateForm').then(m => ({ default: m.CertificateForm })));
+const DnsForm = lazy(() => import('./components/payloads/DnsForm').then(m => ({ default: m.DnsForm })));
+const CalDavForm = lazy(() => import('./components/payloads/CalDavForm').then(m => ({ default: m.CalDavForm })));
+const SubscribedCalendarForm = lazy(() => import('./components/payloads/SubscribedCalendarForm').then(m => ({ default: m.SubscribedCalendarForm })));
+const LdapForm = lazy(() => import('./components/payloads/LdapForm').then(m => ({ default: m.LdapForm })));
+const CameraForm = lazy(() => import('./components/payloads/CameraForm').then(m => ({ default: m.CameraForm })));
+const AppLockForm = lazy(() => import('./components/payloads/AppLockForm').then(m => ({ default: m.AppLockForm })));
+const MdmForm = lazy(() => import('./components/payloads/MdmForm').then(m => ({ default: m.MdmForm })));
+const AppStoreForm = lazy(() => import('./components/payloads/AppStoreForm').then(m => ({ default: m.AppStoreForm })));
+const FindMyForm = lazy(() => import('./components/payloads/FindMyForm').then(m => ({ default: m.FindMyForm })));
+const PhoneForm = lazy(() => import('./components/payloads/PhoneForm').then(m => ({ default: m.PhoneForm })));
+const SettingsRestrictionsForm = lazy(() => import('./components/payloads/SettingsRestrictionsForm').then(m => ({ default: m.SettingsRestrictionsForm })));
+const WebContentFilterForm = lazy(() => import('./components/payloads/WebContentFilterForm').then(m => ({ default: m.WebContentFilterForm })));
+const CellularForm = lazy(() => import('./components/payloads/CellularForm').then(m => ({ default: m.CellularForm })));
+const BluetoothForm = lazy(() => import('./components/payloads/BluetoothForm').then(m => ({ default: m.BluetoothForm })));
+const GlobalHttpProxyForm = lazy(() => import('./components/payloads/GlobalHttpProxyForm').then(m => ({ default: m.GlobalHttpProxyForm })));
+const CardDavForm = lazy(() => import('./components/payloads/CardDavForm').then(m => ({ default: m.CardDavForm })));
+const LockScreenForm = lazy(() => import('./components/payloads/LockScreenForm').then(m => ({ default: m.LockScreenForm })));
+const ExchangeEasForm = lazy(() => import('./components/payloads/ExchangeEasForm').then(m => ({ default: m.ExchangeEasForm })));
+const SafariForm = lazy(() => import('./components/payloads/SafariForm').then(m => ({ default: m.SafariForm })));
+const ScepForm = lazy(() => import('./components/payloads/ScepForm').then(m => ({ default: m.ScepForm })));
+const DomainsForm = lazy(() => import('./components/payloads/DomainsForm').then(m => ({ default: m.DomainsForm })));
+const AirPrintForm = lazy(() => import('./components/payloads/AirPrintForm').then(m => ({ default: m.AirPrintForm })));
+const NotificationSettingsForm = lazy(() => import('./components/payloads/NotificationSettingsForm').then(m => ({ default: m.NotificationSettingsForm })));
+const GoogleAccountForm = lazy(() => import('./components/payloads/GoogleAccountForm').then(m => ({ default: m.GoogleAccountForm })));
+const FontsForm = lazy(() => import('./components/payloads/FontsForm').then(m => ({ default: m.FontsForm })));
+const SsoForm = lazy(() => import('./components/payloads/SsoForm').then(m => ({ default: m.SsoForm })));
+const CallerIdForm = lazy(() => import('./components/payloads/CallerIdForm').then(m => ({ default: m.CallerIdForm })));
 
 // Simple UUID generator
 const generateUUID = () => {
@@ -1048,7 +1050,9 @@ const App: React.FC = () => {
         {/* Form Container */}
         <div className="flex-1 overflow-y-auto overflow-x-hidden p-4 sm:p-8" ref={mainContentRef}>
            <div className="max-w-3xl mx-auto pb-12 min-h-[60vh]" data-active-section={activeId}>
-             {renderActiveContent()}
+             <Suspense fallback={<div className="flex items-center justify-center py-12 text-gray-600 text-sm">Loading…</div>}>
+               {renderActiveContent()}
+             </Suspense>
            </div>
         </div>
       </main>

@@ -1,0 +1,10 @@
+/* App-specific overrides and critical styles. Tailwind is loaded via CDN in index.html. */
+:root {
+  /* Ensure smooth font loading (supplements Google Fonts link) */
+  font-family: Inter, system-ui, -apple-system, sans-serif;
+}
+
+/* Reduce layout shift: reserve space for main content */
+#root {
+  min-height: 100%;
+}
