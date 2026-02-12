@@ -15,13 +15,14 @@ function seoPlugin(baseUrl: string) {
     },
     closeBundle() {
       const dir = path.resolve(process.cwd(), outDir);
+      const lastmod = new Date().toISOString().split('T')[0];
       fs.writeFileSync(
         path.join(dir, 'robots.txt'),
         `User-agent: *\nAllow: /\n\nSitemap: ${baseUrl}/sitemap.xml\n`
       );
       fs.writeFileSync(
         path.join(dir, 'sitemap.xml'),
-        `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>${baseUrl}/</loc>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>\n</urlset>\n`
+        `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n  <url>\n    <loc>${baseUrl}/</loc>\n    <lastmod>${lastmod}</lastmod>\n    <changefreq>weekly</changefreq>\n    <priority>1.0</priority>\n  </url>\n</urlset>\n`
       );
     },
   };

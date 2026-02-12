@@ -140,9 +140,8 @@ ios-profile-manager/
 │   ├── ui/                  # Input, Select, Switch
 │   └── payloads/            # One form per payload type (WifiForm, VPNForm, …)
 ├── public/                   # Static assets (copied to dist/ root)
-│   ├── robots.txt            # Crawler rules; sitemap URL set at build from VITE_APP_URL
-│   ├── sitemap.xml           # Generated at build with canonical URL
 │   └── og-image.png          # Social share image (1200×630)
+│   # robots.txt and sitemap.xml are generated at build by vite.config.ts (from VITE_APP_URL)
 ├── README.md
 ├── CHANGELOG.md
 └── vercel.json              # SPA rewrites for Vercel

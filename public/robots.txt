@@ -1,4 +1,0 @@
-User-agent: *
-Allow: /
-
-Sitemap:https://www.accessdepot.ir/sitemap.xml
