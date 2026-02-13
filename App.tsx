@@ -86,6 +86,7 @@ import { Guide } from './components/Guide';
 import { iPhoneCodes } from './components/iPhoneCodes';
 import { IranUSSDCodes } from './components/IranUSSDCodes';
 import { ESimGuide } from './components/ESimGuide';
+import { Footer } from './components/Footer';
 import { downloadMobileConfig } from './utils/plistGenerator';
 
 // Lazy-load payload forms for smaller initial bundle and better INP
@@ -1055,6 +1056,7 @@ const App: React.FC = () => {
              </Suspense>
            </div>
         </div>
+        <Footer />
       </main>
     </div>
   );
